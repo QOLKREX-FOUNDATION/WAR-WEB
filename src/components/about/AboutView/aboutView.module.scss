@@ -1,0 +1,125 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+.aboutView {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0;
+  background: linear-gradient(90deg, #00b3ac 0%, #9cefff 50%, #00aae3 100%);
+  display: flex;
+  justify-content: center;
+  &__container {
+    max-width: 1500px;
+    padding: 0 3rem;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-around;
+    @include breakpoints.xl-large {
+      grid-template-columns: 1fr;
+      padding: 0 1rem;
+      place-items: center;
+    }
+    & > div {
+      font-family: typography.$typography30;
+      color: colors.$white;
+      & > ul {
+        max-width: 560px;
+        margin: 0;
+        padding: 0;
+        list-style: "🐕‍🦺";
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        & > li {
+          padding-left: 10px;
+        }
+      }
+      & > h2 {
+        padding-left: 10px;
+        padding-bottom: 30px;
+      }
+    }
+  }
+  &__player {
+    // border: 1px solid red;
+    @include utilities.renian-flexbox-param(flex, center, center);
+    flex-direction: column;
+    position: relative;
+    @include breakpoints.medium {
+      margin: 0 auto;
+    }
+    &Video {
+      margin-top: 2rem;
+      border-radius: 25px;
+      width: 100%;
+      max-width: 28rem;
+      height: 17rem;
+      z-index: 2;
+      @include utilities.renian-flexbox-param(flex, center, center);
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      @include breakpoints.xl-large {
+        max-width: 17rem;
+        height: 13rem;
+      }
+      &Preview {
+        position: absolute;
+        cursor: pointer;
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.85),
+            rgba(0, 0, 0, 0.85)
+          ),
+          url("/img/play-preview.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 1rem;
+        width: 100%;
+        height: 100%;
+        @include utilities.renian-flexbox-param(flex, center, center);
+      }
+    }
+    & > p {
+      width: 100%;
+      max-width: 32rem;
+      font-size: 13px;
+      font-family: typography.$typography20;
+      color: colors.$white;
+      text-align: end;
+      margin-top: 3rem;
+      line-height: 1px 1px colors.$black;
+      z-index: 2;
+      @include breakpoints.xl-large {
+        font-size: 11px;
+        margin-top: 1rem;
+      }
+
+      & > span {
+        font-family: typography.$typography40;
+        text-transform: uppercase;
+      }
+    }
+    &Fondo {
+      position: absolute;
+      top: 30px;
+      width: 85%;
+      height: 125%;
+      max-height: 360px;
+      max-width: 600px;
+      background: url("/img/about-section/decoration.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      z-index: 1;
+      @include breakpoints.large {
+        // width: 300px;
+        height: 270px;
+      }
+    }
+  }
+}

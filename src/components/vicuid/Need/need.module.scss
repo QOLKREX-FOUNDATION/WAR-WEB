@@ -1,0 +1,93 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.need {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 2rem;
+  min-height: 80vh;
+  background: #fff;
+  & > h2 {
+    font-size: 28px;
+    font-family: typography.$typography50;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #45b7e1;
+    position: relative;
+    margin: 3rem 0;
+    @include breakpoints.xl-large {
+      font-size: 24px;
+    }
+    @include breakpoints.medium {
+      max-width: 19rem;
+    }
+    & > span {
+      text-transform: uppercase;
+      color: colors.$primary;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      margin-left: -100px;
+      width: 60px;
+      height: 50px;
+      background: url("/img/mission/paws.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      margin-left: 40px;
+      width: 60px;
+      height: 50px;
+      background: url("/img/mission/paws.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      transform: rotate(270deg);
+    }
+  }
+  & > div {
+    max-width: 1024px;
+    & > p {
+      font-size: 18px;
+      font-family: typography.$typography50;
+      line-height: 1.5;
+      @include breakpoints.xl-large {
+        font-size: 16px;
+      }
+      @include breakpoints.medium {
+        max-width: 17rem;
+      }
+    }
+  }
+  &__images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    & > img {
+      width: 100%;
+      max-width: 300px;
+      margin: 1rem 0;
+      transition: all 0.3s ease;
+      &:hover {
+        cursor: pointer;
+        filter: drop-shadow(0 0 0.75rem #45b7e17e);
+        transform: scale(1.05);
+      }
+    }
+  }
+}

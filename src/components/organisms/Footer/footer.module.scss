@@ -1,0 +1,210 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.footer {
+  width: 100%;
+  padding: 2rem 0 6rem;
+  background: #303030;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+  &__container {
+    width: 100%;
+    height: 100%;
+    @include utilities.renian-flexbox-param(flex, auto, space-between);
+    // flex-wrap: wrap;
+    gap: 2rem;
+    @include breakpoints.medium {
+      gap: 0;
+      flex-direction: column;
+    }
+    & > div {
+      // width: 100%;
+    }
+  }
+  &__description {
+    &Image {
+      max-width: 18rem;
+      cursor: pointer;
+      @include breakpoints.medium {
+        margin: 0 auto;
+      }
+    }
+    & > p {
+      margin-top: 1rem;
+      font-family: typography.$typography30;
+      color: colors.$white;
+      font-size: 15px;
+      max-width: 30rem;
+      @include breakpoints.medium {
+        font-size: 11px;
+      }
+    }
+    &Social {
+      display: flex;
+      padding-top: 15px;
+      color: #fff;
+      font-family: typography.$typography30;
+      font-size: 15px;
+      font-weight: 700;
+      gap: 30px;
+    }
+  }
+  &__contact {
+    // border: 1px solid #dd000090;
+    @include utilities.renian-flexbox-param(flex, center, auto);
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    & > ul {
+      flex-direction: column;
+      // margin-top: 1rem;
+      @include breakpoints.medium {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+      }
+      @include utilities.renian-flexbox-param(flex, flex-start, center);
+      flex-direction: column;
+      padding-right: 2.3rem;
+      border-right: 1.5px solid #fff;
+      height: 170px;
+      @include breakpoints.xxl-large {
+        border-right: 0;
+      }
+      &:nth-of-type(3) {
+        padding-right: 0;
+        border-right: none;
+      }
+      & > li {
+        gap: 1.2rem;
+        padding: 0.4rem 0;
+        text-align: end;
+        @include breakpoints.medium {
+          gap: 0.3rem;
+        }
+        & > div {
+          width: 30px;
+          height: 30px;
+          @include utilities.renian-flexbox-param(flex, center, center);
+        }
+        @include utilities.renian-flexbox-param(flex, center, auto);
+        & > a {
+          text-decoration: none;
+          color: #fff;
+          font-size: 20px;
+          @include breakpoints.medium {
+            font-size: 15px;
+          }
+          & > p {
+            font-family: typography.$typography20;
+            color: colors.$white;
+            font-size: 16px;
+            padding-left: 10px;
+          }
+        }
+        & > h3 {
+          font-family: typography.$typography50;
+          color: #fff;
+          font-size: 20px;
+          @include breakpoints.medium {
+            font-size: 17px;
+          }
+        }
+      }
+    }
+    @include breakpoints.medium {
+      flex-direction: column;
+    }
+  }
+}
+
+.controls {
+  width: 100%;
+  padding: 2rem 0;
+  background: colors.$gray80;
+  position: relative;
+  overflow: hidden;
+  &__container {
+    width: 100%;
+    height: 100%;
+    @include utilities.renian-flexbox-param(flex, center, space-between);
+    @include breakpoints.medium {
+      @include utilities.renian-flexbox-param(flex, center, center);
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+  }
+  &__links {
+    @include utilities.renian-flexbox-param(flex, auto, auto);
+    gap: 1.5rem;
+    @include breakpoints.x-small {
+      flex-direction: column;
+      text-align: start;
+    }
+    & > a {
+      color: colors.$gray10;
+      font-family: typography.$typography40;
+      transition: 0.3s;
+      font-size: 16px;
+      @include breakpoints.medium {
+        font-size: 13px;
+      }
+      cursor: pointer;
+      &:hover {
+        color: colors.$primary;
+      }
+    }
+  }
+  &__social {
+    @include utilities.renian-flexbox-param(flex, center, flex-end);
+    gap: 1.5rem;
+    @include breakpoints.x-small {
+      gap: 0.5rem;
+    }
+    & > h5 {
+      color: colors.$white;
+      font-family: typography.$typography30;
+      font-size: 13px;
+      @include breakpoints.medium {
+        font-size: 10px;
+      }
+    }
+    & > div {
+      @include utilities.renian-flexbox-param(flex, center, auto);
+      gap: 0.5rem;
+      & img {
+        transition: 0.4s;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}
+
+.copyright {
+  width: 100%;
+  padding: 0.6rem 0;
+  position: relative;
+  background: colors.$primary100;
+  @include breakpoints.medium {
+    padding: 0.3rem 0;
+  }
+  &__container {
+    width: 100%;
+    height: 100%;
+    @include utilities.renian-flexbox-param(flex, center, space-around);
+    & > p {
+      font-family: typography.$typography20;
+      font-size: 12px;
+      color: colors.$gray10;
+      @include breakpoints.medium {
+        font-size: 9px;
+      }
+    }
+  }
+}

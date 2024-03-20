@@ -1,0 +1,77 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.shop {
+  width: 100%;
+  height: 100%;
+  & > div {
+    width: 100%;
+    padding: 2rem;
+    background: #fff;
+    // box-shadow: 0px 4px 4px 0px #00000040;
+    @include utilities.renian-flexbox-param(flex, center, center);
+    flex-direction: column;
+    & > h1 {
+      font-size: 32px;
+      font-family: typography.$typography50;
+      text-align: center;
+      color: #45b7e1;
+      @include breakpoints.xl-large {
+        font-size: 26px;
+      }
+      & > span {
+        text-transform: uppercase;
+        color: colors.$primary;
+      }
+    }
+    & > p {
+      font-size: 18px;
+      font-family: typography.$typography20;
+      line-height: 28px;
+      @include breakpoints.xl-large {
+        font-size: 14px;
+        line-height: 22px;
+      }
+    }
+    & a {
+      margin-top: 1rem;
+      font-size: 18px;
+      font-family: typography.$typography50;
+      background: #45b7e1;
+      line-height: 28px;
+      padding: 0.5rem 2rem;
+      color: #fff;
+      font-weight: 900;
+      border-radius: 15px;
+      border: 1px solid transparent;
+      transition: color 0.3s ease-in-out, background 0.3s ease-in-out,
+        border 0.3s ease-in-out;
+      @include breakpoints.xl-large {
+        font-size: 14px;
+        line-height: 22px;
+      }
+      &:hover {
+        background: #fff;
+        color: #45b7e1;
+        border: 1px solid #45b7e1;
+      }
+    }
+    a:hover + img {
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+  }
+}

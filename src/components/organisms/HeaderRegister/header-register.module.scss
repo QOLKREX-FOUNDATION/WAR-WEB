@@ -1,0 +1,50 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.register {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 7rem;
+  background: url("/img/main-frame.png");
+  background-position: center -10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include breakpoints.medium {
+    display: none;
+  }
+  &__logo {
+    position: absolute;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    max-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(253, 192, 37);
+    background: url("/img/logo-frame.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    @include breakpoints.medium {
+      max-width: 5rem;
+    }
+    @include breakpoints.small {
+      max-width: 3rem;
+    }
+    & > img {
+      padding-top: 10px;
+      width: 20%;
+      height: 20%;
+    }
+  }
+}

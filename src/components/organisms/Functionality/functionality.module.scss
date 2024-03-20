@@ -1,0 +1,258 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.functionality {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 12rem 0 10rem 0;
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    @include utilities.renian-flexbox-param(flex, center, center);
+    flex-direction: column;
+    & > div {
+      width: 100%;
+      margin-top: 3rem;
+      @include utilities.renian-grid-param(grid, repeat(1, 1fr), auto, 1.5rem);
+      place-items: center;
+      @include breakpoints.medium {
+        @include utilities.renian-grid-param(grid, 1fr, 5rem, 1.5rem);
+      }
+    }
+    &Title1 {
+      &::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        margin-left: -100px;
+        width: 60px;
+        height: 50px;
+        background: url("/img/mission/paws.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: -10px;
+        margin-left: 45px;
+        width: 60px;
+        height: 50px;
+        background: url("/img/mission/paws.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        transform: rotate(270deg);
+      }
+    }
+    &Title2 {
+      position: relative;
+      max-width: clamp(300px, 50%, 550px);
+      &::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        margin-left: -100px;
+        width: 60px;
+        height: 50px;
+        background: url("/img/mission/paws.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        @include breakpoints.medium {
+          margin-left: -80px;
+        }
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: -10px;
+        margin-left: 130px;
+        width: 60px;
+        height: 50px;
+        background: url("/img/mission/paws.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        transform: rotate(270deg);
+        @include breakpoints.large {
+          margin-left: 30px;
+        }
+      }
+    }
+  }
+  &__divider {
+    padding-bottom: 200px;
+  }
+  & h2 {
+    font-size: 28px;
+    font-family: typography.$typography50;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #45b7e1;
+    @include breakpoints.xl-large {
+      font-size: 24px;
+    }
+    @include breakpoints.medium {
+      width: 250px;
+    }
+    & > span {
+      text-transform: uppercase;
+      color: #45b7e1;
+      text-align: center;
+    }
+  }
+  & p {
+    margin-top: 0.5rem;
+    font-size: 18px;
+    font-family: typography.$typography20;
+    line-height: 28px;
+    @include breakpoints.xl-large {
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+  & span {
+    font-size: 18px;
+    font-family: typography.$typography40;
+    color: #45b7e1;
+    font-style: italic;
+    display: block;
+  }
+  &__text {
+    text-align: center;
+    width: 100%;
+    max-width: 50rem;
+    @include utilities.renian-flexbox-param(flex, flex-start, auto);
+    flex-direction: column;
+    & > span {
+      width: 100%;
+      text-align: center;
+      padding-bottom: 3rem;
+    }
+    & > p {
+      padding-bottom: 2rem;
+    }
+  }
+  &__image {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 70rem;
+    @include utilities.renian-flexbox-param(flex, center, flex-end);
+    @include breakpoints.medium {
+      @include utilities.renian-flexbox-param(flex, center, center);
+    }
+    & > div {
+      position: relative;
+      width: 100%;
+      // max-width: 70rem;
+      & > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+.chip {
+  width: 100%;
+  &__container {
+    width: 100%;
+    height: 100%;
+    max-width: 55rem;
+    margin: 0 auto;
+    padding: 4rem 2%;
+    @include breakpoints.medium {
+      padding: 4rem 8%;
+    }
+    & p {
+      margin-top: 0.5rem;
+      font-size: 18px;
+      font-family: typography.$typography20;
+      line-height: 28px;
+      @include breakpoints.xl-large {
+        font-size: 14px;
+        line-height: 22px;
+      }
+    }
+    & span {
+      font-size: 18px;
+      font-family: typography.$typography40;
+      color: colors.$primary;
+      font-style: italic;
+      display: block;
+    }
+    @include utilities.renian-grid-param(grid, repeat(2, 1fr), auto, 1.5rem);
+    @include breakpoints.medium {
+      @include utilities.renian-grid-param(grid, 1fr, 2rem, 1.5rem);
+    }
+  }
+  &__image {
+    width: 100%;
+    max-width: 30rem;
+    &:hover {
+      animation: horizontal-shaking;
+      animation-iteration-count: infinite;
+    }
+    @keyframes horizontal-shaking {
+      0% {
+        transform: translateX(0);
+      }
+      25% {
+        transform: translateX(5px);
+      }
+      50% {
+        transform: translateX(-5px);
+      }
+      75% {
+        transform: translateX(5px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+    @include breakpoints.medium {
+      max-width: 20rem;
+      margin: 0 auto;
+    }
+  }
+  &__detail {
+    @include utilities.renian-flexbox-param(flex, flex-end, auto);
+    flex-direction: column;
+    @include breakpoints.medium {
+      @include utilities.renian-flexbox-param(flex, flex-start, auto);
+    }
+    & > p {
+      margin: 0.3rem 0 1rem 0;
+    }
+    & > ul {
+      font-size: 18px;
+      line-height: 25px;
+      font-family: typography.$typography20;
+      list-style-type: circle;
+      @include breakpoints.xl-large {
+        font-size: 14px;
+        line-height: 22px;
+      }
+    }
+  }
+}
+
+.frametop {
+  width: 100%;
+  height: 8rem;
+  position: absolute;
+  top: -2%;
+  z-index: 1;
+  background: url("/img/color-frame.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

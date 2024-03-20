@@ -1,0 +1,179 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.faq {
+  position: relative;
+  min-height: 90vh;
+  background: url("/img/faq/fondo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-around;
+    @include breakpoints.large {
+      flex-direction: column-reverse;
+      margin-top: 4rem;
+    }
+    &Answer {
+      width: 100%;
+      max-width: 450px;
+      height: 600px;
+      position: relative;
+      background-image: url("/img/faq/faq_answer.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem;
+      & > h1 {
+        font-family: typography.$typographyMono;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+      & > p {
+        z-index: 10;
+        font-size: 1rem;
+        font-weight: 300;
+        word-spacing: 2px;
+        line-height: 1.5rem;
+      }
+      & > p::first-letter {
+        font-size: 2rem;
+      }
+      & > ul {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        & > li {
+          transition: all 0.3s ease;
+          font-weight: bold;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          & > img {
+            width: 200px;
+            height: 125px;
+            border-radius: 10px;
+            margin-left: 80px;
+          }
+        }
+      }
+    }
+    &Question {
+      max-width: 450px;
+      height: 500px;
+      gap: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      color: #fff;
+      font-family: typography.$typographyMono;
+      & > div {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.269) 0%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        position: relative;
+        padding: 2rem 1rem;
+        border-radius: 20px;
+        & > ul {
+          gap: 1rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          & > li {
+            transition: all 0.3s ease;
+            font-weight: bold;
+            &:hover {
+              cursor: pointer;
+              text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            }
+          }
+        }
+        & > div {
+          width: 20px;
+          height: 20px;
+          background: #d9d9d9;
+          position: absolute;
+          border-radius: 50%;
+          right: 25px;
+          top: 25px;
+        }
+      }
+
+      & > img {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 60%;
+        height: 50%;
+        object-fit: contain;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        opacity: 0.8;
+      }
+      // &::after {
+      //   content: "";
+      //   position: absolute;
+      //   bottom: 0;
+      //   right: 0;
+      //   width: 50%;
+      //   height: 50%;
+      //   // border: 1px solid #fff;
+      //   background: url("/img/faq/wolf.png");
+      //   background-position: center;
+      //   background-repeat: no-repeat;
+      //   background-size: contain;
+      //   z-index: 1;
+      // }
+    }
+  }
+  &__containerAnimate {
+    animation: animate 1s ease-in-out;
+
+    @keyframes animate {
+      0% {
+        opacity: 0;
+        transform: translateY(100px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+.frametop {
+  width: 100%;
+  height: 10rem;
+  position: absolute;
+  top: -9%;
+  z-index: 1;
+  background: url("/img/faq/deco_faq.png");
+  // background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100vw 150px;
+}

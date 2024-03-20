@@ -1,0 +1,190 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.news {
+  width: 100%;
+  height: 100%;
+  min-height: 98vh;
+  position: relative;
+  background: rgb(66, 66, 66);
+  background: linear-gradient(
+    90deg,
+    rgba(66, 66, 66, 1) 0%,
+    rgba(155, 155, 155, 1) 55%,
+    rgba(66, 66, 66, 1) 100%
+  );
+  background-image: url("/img/news/fondo.png");
+  background-size: 100% cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  // background-position-y: -40px;
+  // background-position-x: center;
+  padding: 8rem 0 0rem 0;
+  text-align: center;
+  @include breakpoints.medium {
+    // padding-top: 20rem;
+    max-height: 100vh;
+  }
+  & > div:last-child {
+    // margin-top: 2rem;
+  }
+  &__container {
+    // padding-top: 120px;
+    // padding-bottom: 48px;
+    width: 100%;
+    height: 100%;
+  }
+  &__text {
+    text-align: center;
+    width: 100%;
+    max-width: 38rem;
+    margin: 0 auto;
+    color: colors.$gray10;
+    & h1 {
+      color: colors.$white;
+      font-size: 32px;
+      font-family: typography.$typography50;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      @include breakpoints.xl-large {
+        font-size: 26px;
+      }
+      & > span {
+        text-transform: uppercase;
+        color: colors.$primary;
+      }
+    }
+    & p {
+      margin-top: 0.5rem;
+      font-size: 18px;
+      font-family: typography.$typography20;
+      line-height: 28px;
+      @include breakpoints.xl-large {
+        font-size: 14px;
+        line-height: 22px;
+      }
+    }
+  }
+  &__slide {
+    width: 100%;
+    padding: 0 3rem 3rem 3rem;
+    @include breakpoints.large {
+      padding: 0 2rem 3rem 2rem;
+    }
+  }
+  &__card {
+    height: 460px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: colors.$gray10;
+    cursor: pointer;
+    transition: 0.5s;
+    transform: scale(0.98);
+    &:hover {
+      transform: scale(1);
+    }
+
+    &Deg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.212);
+      backdrop-filter: blur(0.2rem);
+      z-index: 1;
+      transition-duration: 0.4s;
+      & > div {
+        width: 100%;
+        height: 100%;
+        @include utilities.renian-flexbox-param(flex, center, center);
+        flex-direction: column;
+        & > p {
+          font-family: typography.$typography20;
+          font-size: 20px;
+          color: colors.$gray50;
+          text-shadow: 1px 1px 4px colors.$black;
+          user-select: none;
+        }
+      }
+    }
+    &Image {
+      position: relative;
+      width: 100%;
+      & img {
+        width: 100%;
+        height: 12rem;
+      }
+    }
+    &Content {
+      text-align: start;
+      padding: 1.5rem 1.8rem;
+      & > h6 {
+        font-size: 11px;
+        font-family: typography.$typography30;
+        color: colors.$gray50;
+      }
+      & > h3 {
+        margin-top: 0.2rem;
+        font-size: 22px;
+        min-height: 3.5rem;
+        font-family: typography.$typography50;
+        color: colors.$primary;
+        @include utilities.renian-truncate-lines(2);
+      }
+      & > p {
+        margin-top: 1rem;
+        font-size: 16px;
+        font-family: typography.$typography20;
+        color: colors.$gray60;
+        @include utilities.renian-truncate-lines(3);
+      }
+    }
+  }
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
+  min-height: 15rem;
+  padding-top: 4rem;
+  &__desktop {
+    display: block;
+    @include breakpoints.medium {
+      display: none;
+    }
+  }
+  &__mobile {
+    display: none;
+    @include breakpoints.medium {
+      display: block;
+    }
+  }
+}
+
+.frametop {
+  width: 100%;
+  height: 6rem;
+  position: relative;
+  top: -4%;
+  z-index: 1;
+  background: url("/img/gray-frame.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: rotate(180deg);
+  filter: brightness(1.4) drop-shadow(0px 0px 5rem rgba(255, 255, 255, 0.862));
+}
+
+// .frametop {
+//   width: 100%;
+//   height: 10rem;
+//   position: relative;
+//   top: -9%;
+//   z-index: 1;
+//   background: url("/img/faq/deco_faq.png");
+//   // background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: 100vw 150px;
+// }

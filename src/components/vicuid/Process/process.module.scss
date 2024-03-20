@@ -1,0 +1,59 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.process {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80vh;
+  background: #fff;
+  & h2 {
+    margin: 3rem 0;
+    font-size: 28px;
+    font-family: typography.$typography50;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #45b7e1;
+    position: relative;
+    @include breakpoints.xl-large {
+      font-size: 24px;
+    }
+    @include breakpoints.medium {
+      max-width: 10rem;
+    }
+    & > span {
+      text-transform: uppercase;
+      color: colors.$primary;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      margin-left: -100px;
+      width: 60px;
+      height: 50px;
+      background: url("/img/mission/paws.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      margin-left: 40px;
+      width: 60px;
+      height: 50px;
+      background: url("/img/mission/paws.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      transform: rotate(270deg);
+    }
+  }
+}

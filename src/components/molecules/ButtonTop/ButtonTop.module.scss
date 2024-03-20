@@ -1,0 +1,39 @@
+$color-primary: #00b6a8;
+$color-white: #fff;
+.BtnTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: $color-primary;
+  color: $color-white;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  z-index: 9999;
+  overflow: hidden;
+  border: none;
+  padding: 5px;
+  &:hover {
+    background-color: darken($color: $color-primary, $amount: 10);
+  }
+  svg {
+    transition: all 0.3s ease-in-out;
+  }
+  &:hover svg {
+    animation: EnterBoToomToTop 0.3s ease-in-out forwards;
+  }
+  @keyframes EnterBoToomToTop {
+    0% {
+      transform: translateY(20%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}

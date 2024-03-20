@@ -1,0 +1,89 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.applicationField {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  position: relative;
+  z-index: 100;
+  & > h2 {
+    font-size: 28px;
+    font-family: typography.$typography50;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+    color: #45b7e1;
+    &::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      margin-left: -100px;
+      width: 60px;
+      height: 50px;
+      background: url("/img/mission/paws.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      margin-left: 40px;
+      width: 60px;
+      height: 50px;
+      background: url("/img/mission/paws.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      transform: rotate(270deg);
+    }
+  }
+  &__container {
+    margin: 4rem auto 3rem auto;
+    place-items: center;
+    @include utilities.renian-grid-param(grid, 1fr 1fr 1fr, auto, 2rem);
+    row-gap: 2rem;
+    max-width: 1000px;
+    @include breakpoints.large {
+      @include utilities.renian-grid-param(grid, 1fr 1fr, auto, auto);
+    }
+    @include breakpoints.medium {
+      @include utilities.renian-grid-param(grid, 1fr, auto, auto);
+    }
+    & > div {
+      box-shadow: 0px 4px 4px 0px #00000040;
+      border-radius: 27px;
+      padding: 2rem;
+      text-align: center;
+      font-family: typography.$typography50;
+      max-width: 324px;
+      height: 280px;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        box-shadow: 0px 4px 4px 0px #00000080;
+        scale: 1.05;
+      }
+    }
+  }
+}
+.frametop {
+  width: 100%;
+  height: 8rem;
+  position: relative;
+  top: -10%;
+  left: 0;
+  z-index: 1;
+  background: url("/img/application-field/frame.png");
+  background-position: center -8px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -1,0 +1,193 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.compaign {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  min-height: auto;
+  background: #fff;
+  min-height: 60vh;
+  padding: 0 2rem;
+  padding-bottom: 5rem;
+  // padding-top: 5rem;
+  & h2 {
+    margin: 3rem 0;
+    font-size: 24px;
+    font-family: typography.$typography50;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #45b7e1;
+    position: relative;
+    max-width: 550px;
+    // padding-bottom: 4rem;
+    @include breakpoints.xl-large {
+      font-size: 24px;
+    }
+    @include breakpoints.medium {
+      max-width: 10rem;
+    }
+    & > span {
+      text-transform: uppercase;
+      color: colors.$primary;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      margin-left: -100px;
+      width: 60px;
+      height: 50px;
+      background: url("/img/mission/paws.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      margin-left: 40px;
+      width: 60px;
+      height: 50px;
+      background: url("/img/mission/paws.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      transform: rotate(270deg);
+    }
+  }
+  & > div {
+    width: 100%;
+    max-width: 1024px;
+    @include utilities.renian-grid-param(grid, repeat(2, 1fr), auto, 1rem);
+    gap: 1rem;
+    column-gap: 3rem;
+    @include breakpoints.medium {
+      @include utilities.renian-grid-param(grid, repeat(1, 1fr), auto, 1rem);
+    }
+    & > div {
+      font-family: typography.$typography50;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      & > p:nth-of-type(2) {
+        color: #45b7e1;
+      }
+      & > a {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 250px;
+        height: 2rem;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 1.2rem;
+        font-size: 0.9rem;
+        font-family: typography.$typography50;
+        outline: none;
+        transition: all 0.3s ease;
+        &:nth-of-type(1) {
+          color: rgb(255, 255, 255);
+          background: linear-gradient(180deg, #3ec2ee 0%, #119aca 100%);
+        }
+        &:focus {
+          border: 1px solid colors.$primary;
+        }
+      }
+      & > div {
+        @include utilities.renian-grid-param(grid, repeat(2, 1fr), auto, 1rem);
+        & > div {
+          display: flex;
+          & > p {
+            font-size: 14px;
+          }
+          & > img {
+            width: 30px;
+            height: 30px;
+            margin-right: 1rem;
+          }
+        }
+      }
+      & > input {
+        width: 100%;
+        // max-width: 350px;
+        height: 2rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 0 1rem;
+        font-size: 1rem;
+        font-family: typography.$typography50;
+        color: #333;
+        outline: none;
+        transition: all 0.3s ease;
+        &:focus {
+          border: 1px solid colors.$primary;
+        }
+      }
+    }
+  }
+  &__certificates {
+    & > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      & > h3 {
+        font-family: typography.$typography50;
+        color: #45b7e1;
+        margin: 5rem 0 1rem 0;
+        text-align: center;
+        position: relative;
+        @include breakpoints.xl-large {
+          font-size: 24px;
+        }
+        @include breakpoints.medium {
+          max-width: 10rem;
+        }
+        & > span {
+          text-transform: uppercase;
+          color: colors.$primary;
+        }
+        &::before {
+          content: "";
+          position: absolute;
+          top: -10px;
+          margin-left: -100px;
+          width: 60px;
+          height: 50px;
+          background: url("/img/mission/paws.png");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          top: -10px;
+          margin-left: 40px;
+          width: 60px;
+          height: 50px;
+          background: url("/img/mission/paws.png");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          transform: rotate(270deg);
+        }
+      }
+    }
+    &__image1 {
+      width: 350px;
+      height: auto;
+    }
+    &__image2 {
+      width: 250px;
+      height: auto;
+    }
+  }
+}

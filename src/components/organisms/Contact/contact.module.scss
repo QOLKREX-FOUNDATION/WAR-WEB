@@ -1,0 +1,241 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.contact {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0;
+  padding-bottom: 7rem;
+  & > video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  &__container {
+    width: 100%;
+    height: 100%;
+    // mix-blend-mode: multiply;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    background: colors.$white;
+    border-radius: 25px;
+    max-width: 65rem;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.657);
+    // background: url("/img/contact/fondo.png");
+    // background-size: cover;
+    // background-position: center;
+    // background-repeat: no-repeat;
+    // background-image: url("https://images.unsplash.com/photo-1517670972079-a58c8d6c0af8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80");
+  }
+  &__form {
+    width: 100%;
+    // padding: 30px;
+    max-width: 30rem;
+    color: colors.$gray60;
+
+    @include breakpoints.xl-large {
+      max-width: 25rem;
+    }
+    @include breakpoints.medium {
+      max-width: none;
+    }
+    & > h4 {
+      font-size: 28px;
+      font-family: typography.$typography50;
+      text-align: center;
+      @include breakpoints.xl-large {
+        font-size: 20px;
+      }
+    }
+
+    & > div {
+      padding-top: 6rem;
+      padding-bottom: 3rem;
+      & > h1 {
+        background: #fff;
+        font-size: 50px;
+        font-family: typography.$typography70;
+        text-align: center;
+        text-transform: uppercase;
+        color: colors.$black;
+        // mix-blend-mode: screen;
+        // -webkit-background-clip: text;
+        // -webkit-text-fill-color: transparent;
+        @include breakpoints.xl-large {
+          font-size: 30px;
+          font-size: 50px;
+          font-family: typography.$typography70;
+          text-align: center;
+          text-transform: uppercase;
+          color: colors.$black;
+        }
+        @include breakpoints.small {
+          font-size: 25px;
+        }
+      }
+      @include breakpoints.xl-large {
+        padding: 3.5vw;
+        padding-top: 5rem;
+        padding-bottom: 1rem;
+      }
+      & > form {
+        & > div {
+          @include utilities.renian-flexbox-param(flex, auto, flex-start);
+          flex-direction: column;
+          width: 100%;
+          @include breakpoints.xl-large {
+            height: 4.5rem;
+          }
+          & > span {
+            font-size: 16px;
+            font-family: typography.$typographyMono;
+            margin: 0 0 0.4rem 0.4rem;
+            @include breakpoints.xl-large {
+              font-size: 13px;
+            }
+          }
+          & > input {
+            outline: none;
+            border: 1px solid colors.$gray30;
+            border-radius: 10px;
+            font-family: typography.$typography40;
+            font-size: clamp(16px, 1.5vw, 20px);
+            padding: 1rem 1rem;
+            color: colors.$gray60;
+            background: rgb(249, 248, 248);
+            &:focus {
+              font-family: typography.$typography50;
+              border-color: colors.$primary;
+            }
+            @include breakpoints.xl-large {
+              font-size: 13px;
+              padding: 0.4rem 0.7rem;
+            }
+          }
+          & > textarea {
+            outline: none;
+            border: 1px solid colors.$gray30;
+            border-radius: 10px;
+            font-family: typography.$typography40;
+            font-size: 16px;
+            padding: 0.5rem 1rem;
+            color: colors.$gray60;
+            resize: none;
+            background: rgb(249, 248, 248);
+            &:focus {
+              border: 1px solid colors.$primary;
+            }
+            @include breakpoints.xl-large {
+              font-size: 10px;
+            }
+          }
+          & > small {
+            margin-left: 5px;
+            color: colors.$error;
+            font-size: 11px;
+            font-family: typography.$typography30;
+            @include breakpoints.xl-large {
+              font-size: 9px;
+            }
+          }
+        }
+      }
+    }
+    &Textarea {
+      height: 15rem !important;
+      @include breakpoints.xl-large {
+        height: 12rem !important;
+      }
+      & > textarea {
+        height: 10rem;
+        outline: none;
+        border: 1px solid colors.$gray30;
+        border-radius: 15px;
+        font-family: typography.$typography40;
+        font-size: 16px;
+        padding: 0.8rem 1rem;
+        color: colors.$gray60;
+        resize: none;
+        background: rgb(249, 248, 248);
+        &:focus {
+          border: 1px solid colors.$primary;
+        }
+        @include breakpoints.xl-large {
+          height: 8rem;
+          font-size: 10px;
+        }
+      }
+    }
+    &Button {
+      padding-top: 20px;
+      max-width: 15rem;
+      margin: 0 auto;
+    }
+  }
+  &__image {
+    width: 100%;
+    height: 100%;
+    @include utilities.renian-flexbox-param(flex, center, center);
+    text-align: start;
+    @include breakpoints.medium {
+      display: none;
+    }
+    &Video {
+      margin-top: 2rem;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 28rem;
+      height: 17rem;
+      @include utilities.renian-flexbox-param(flex, center, center);
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      @include breakpoints.xl-large {
+        max-width: 17rem;
+        height: 13rem;
+      }
+      @include breakpoints.medium {
+        margin: 0 auto;
+      }
+      &Preview {
+        position: absolute;
+        cursor: pointer;
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.85),
+            rgba(0, 0, 0, 0.85)
+          ),
+          url("/img/play-preview.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 1rem;
+        width: 100%;
+        height: 100%;
+        @include utilities.renian-flexbox-param(flex, center, center);
+      }
+    }
+  }
+}
+
+.framebottom {
+  width: 100%;
+  height: 5rem;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  background: url("/img/gray-frame.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: rotate(180deg);
+  filter: brightness(1.3);
+}

@@ -1,0 +1,504 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.home {
+  width: 100%;
+  height: calc((100vh) - (2.5rem + 13rem));
+  position: relative;
+  background: black;
+  @include breakpoints.xl-large {
+    height: calc((100vh) - (2rem + 10rem));
+  }
+  &__top {
+    width: 100%;
+    height: 15%;
+    position: absolute;
+    top: -2%;
+    z-index: 1;
+    background: url("/img/main-frame.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    @include breakpoints.medium {
+      display: none;
+    }
+  }
+  &__logo {
+    background: orange;
+    width: 10%;
+    height: 16%;
+    position: absolute;
+    top: -1%;
+    left: 0;
+    z-index: 10;
+    background: url("/img/logo-frame.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    @include breakpoints.medium {
+      width: 25%;
+    }
+    @include breakpoints.small {
+      width: 35%;
+    }
+    & > div {
+      width: 100%;
+      max-width: 10rem;
+      margin: 0 auto;
+    }
+    & img {
+      width: 100%;
+    }
+  }
+
+  &__header {
+    // background: violet;
+    width: 40%;
+    height: 14%;
+    position: absolute;
+    top: 13%;
+    right: 0;
+    z-index: 10;
+    @include utilities.renian-grid-param(grid, repeat(4, 1fr), auto, 0);
+    & > div {
+      width: 100%;
+      height: 100%;
+      border: 1px solid red;
+      & > img {
+        width: 100%;
+      }
+    }
+  }
+  &__menu {
+    width: 100%;
+    max-width: 650px;
+    height: 10%;
+    position: absolute;
+    bottom: 16%;
+    right: 0;
+    z-index: 10;
+    @include utilities.renian-grid-param(grid, repeat(4, 1fr), auto, 0);
+    @include breakpoints.medium {
+      display: none;
+    }
+    & > div {
+      width: 100%;
+      height: 100%;
+      // border: 1px solid red;
+      &:nth-of-type(2) {
+        margin-left: 0.5rem;
+      }
+      &:nth-of-type(3) {
+        margin-left: 0.1rem;
+      }
+      //
+      &:nth-of-type(1) {
+        & > a {
+          & > h4 {
+            top: 12%;
+            left: 13%;
+            font-size: 0.8rem;
+          }
+          & > img {
+            transform: scaleY(1.15);
+          }
+        }
+      }
+      &:nth-of-type(2) {
+        & > a {
+          & > h4 {
+            top: 30%;
+            left: 24%;
+          }
+        }
+      }
+      &:nth-of-type(3) {
+        & > a {
+          & > h4 {
+            top: 16%;
+            // left: 24%;
+          }
+        }
+      }
+      &:nth-of-type(4) {
+        & > a {
+          & > h4 {
+            top: 27%;
+            left: 30%;
+            font-size: 0.85rem;
+          }
+        }
+      }
+      //
+      & > a {
+        // border: 1px solid blue;
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: relative;
+        & > h4 {
+          position: absolute;
+          font-family: typography.$typography50;
+          font-size: 0.9rem;
+          font-weight: 400;
+          color: colors.$white;
+          text-align: center;
+          text-transform: uppercase;
+          z-index: 10;
+          transition: all 0.2s ease;
+        }
+
+        &:hover img {
+          scale: 1.2;
+          cursor: pointer;
+          filter: saturate(1) brightness(1.4);
+        }
+        &:hover h4 {
+          scale: 1.1;
+        }
+        & > img {
+          width: 100%;
+          height: 100%;
+          scale: 1.14;
+          z-index: 1;
+          filter: saturate(0);
+          transition: all 0.2s ease;
+        }
+      }
+    }
+    &FaqEs {
+      left: 0;
+    }
+    &FaqEn {
+      left: 24%;
+    }
+  }
+  &__menutop {
+    width: 100%;
+    max-width: 650px;
+    height: 10%;
+    position: absolute;
+    top: 16%;
+    // left: 2;
+    z-index: 10;
+    @include utilities.renian-grid-param(grid, repeat(4, 1fr), auto, 0);
+    @include breakpoints.medium {
+      display: none;
+    }
+    & > div {
+      width: 100%;
+      height: 100%;
+      // border: 1px solid red;
+      &:nth-of-type(2) {
+        margin-left: 0.5rem;
+      }
+      &:nth-of-type(3) {
+        margin-left: 0.1rem;
+      }
+      //
+      &:nth-of-type(1) {
+        & > a {
+          & > h4 {
+            top: 17%;
+            left: 7%;
+            font-size: 0.8rem;
+          }
+          & > img {
+            transform: scaleY(1.15);
+          }
+        }
+      }
+      &:nth-of-type(2) {
+        position: relative;
+        left: -10px;
+        & > a {
+          & > h4 {
+            top: 10%;
+            left: 12%;
+          }
+        }
+      }
+      &:nth-of-type(3) {
+        position: relative;
+        left: -10px;
+        & > a {
+          & > h4 {
+            top: 18%;
+            left: 29%;
+          }
+        }
+      }
+      &:nth-of-type(4) {
+        position: relative;
+        left: -5px;
+        & > a {
+          & > h4 {
+            top: 13%;
+            left: 26%;
+            font-size: 0.85rem;
+          }
+        }
+      }
+      //
+      & > a {
+        // border: 1px solid blue;
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: relative;
+        & > h4 {
+          position: absolute;
+          font-family: typography.$typography50;
+          font-size: 0.9rem;
+          font-weight: 400;
+          color: colors.$white;
+          text-align: center;
+          text-transform: uppercase;
+          z-index: 10;
+          transition: all 0.2s ease;
+        }
+
+        &:hover img {
+          scale: 1.2;
+          cursor: pointer;
+          filter: saturate(1) brightness(1.4);
+        }
+        &:hover h4 {
+          scale: 1.1;
+        }
+        & > img {
+          width: 100%;
+          height: 100%;
+          scale: 1.1;
+          z-index: 1;
+          filter: saturate(0);
+          transition: all 0.2s ease;
+        }
+      }
+    }
+  }
+  &__indicators {
+    // background: red;
+    width: 9%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    @include utilities.renian-flexbox-param(flex, center, center);
+    gap: 3%;
+    flex-direction: column;
+    @include breakpoints.medium {
+      display: none;
+    }
+    &Item {
+      width: 100%;
+      height: 14%;
+      position: relative;
+      & > div {
+        & > img {
+          opacity: 0.6;
+          filter: hue-rotate(180deg);
+        }
+      }
+      @include utilities.renian-flexbox-param(flex, auto, center);
+      &Rotate {
+        position: absolute;
+        top: 0;
+        z-index: 3;
+        width: 100%;
+        height: 100%;
+        & > div {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          & > img {
+            opacity: 0.6;
+            width: 100%;
+            max-width: 70px;
+            height: auto;
+            animation: rotate 1.5s linear infinite;
+            filter: hue-rotate(180deg);
+            @keyframes rotate {
+              to {
+                transform: rotate(360deg);
+              }
+            }
+          }
+        }
+      }
+      & > h1 {
+        position: absolute;
+        top: calc(20% - 0.5rem);
+        text-align: center;
+        // font-family: typography.$typographySecondary;
+        font-family: typography.$typographyMono;
+        font-size: 25px;
+        color: colors.$black;
+        @include breakpoints.xxl-large {
+          top: 12%;
+          font-size: 20px;
+        }
+        @include breakpoints.large {
+          top: 10%;
+          font-size: 18px;
+        }
+      }
+      & > h4 {
+        position: absolute;
+        bottom: 14%;
+        max-width: 80%;
+        text-align: center;
+        font-family: typography.$typography50;
+        font-size: 14px;
+        color: colors.$black;
+        @include breakpoints.xxl-large {
+          font-size: 12px;
+        }
+        @include breakpoints.large {
+          font-size: 10px;
+        }
+      }
+      & > div {
+        width: 100%;
+        max-width: 55%;
+        & > img {
+          width: 100%;
+        }
+      }
+      & > div {
+        & > img {
+          max-height: 70px;
+          max-width: 70px;
+        }
+      }
+      @include breakpoints.xxl-large {
+        height: 13%;
+      }
+    }
+  }
+  &__pets {
+    // background: yellow;
+    width: 11%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    @include utilities.renian-flexbox-param(flex, center, center);
+    gap: 10%;
+    flex-direction: column;
+    @include breakpoints.medium {
+      display: none;
+    }
+    & > div {
+      width: 100%;
+      max-width: 65%;
+      & > img {
+        width: 100%;
+        filter: hue-rotate(180deg);
+      }
+    }
+  }
+  &__ornaments {
+    width: 100%;
+    height: 8.5%;
+    position: absolute;
+    bottom: 2%;
+    z-index: 3;
+    @include utilities.renian-grid-param(grid, 1.3fr 0.4fr 1.3fr, auto, 1%);
+    @include breakpoints.medium {
+      display: none;
+    }
+    &Foots {
+      width: 100%;
+      @include utilities.renian-flexbox-param(flex, center, center);
+      & > div {
+        width: 100%;
+        max-width: 60%;
+        & > img {
+          width: 100%;
+        }
+      }
+    }
+    &Center {
+      width: 100%;
+      @include utilities.renian-flexbox-param(flex, center, space-between);
+      gap: 0.5%;
+      &Sniper {
+        width: 100%;
+        max-width: 20%;
+      }
+      &Hueso {
+        width: 100%;
+        max-width: 20%;
+        transition: all 0.2s ease;
+        &:hover {
+          cursor: pointer;
+          scale: 1.1;
+        }
+      }
+    }
+  }
+  &__bottom {
+    width: 100%;
+    // height: 8rem;
+    height: 15%;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    background: url("/img/color-frame.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: rotate(180deg);
+    @include breakpoints.medium {
+      display: none;
+    }
+  }
+  &__menumobile {
+    @include breakpoints.medium {
+      display: block;
+    }
+    display: none;
+    &__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.532);
+      font-family: typography.$typographyMono;
+      font-size: 1.5rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      & > div {
+        & > a {
+          color: colors.$primary;
+          text-decoration: none;
+        }
+      }
+    }
+    button {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 11;
+      color: colors.$primary;
+    }
+  }
+}

@@ -1,0 +1,129 @@
+@use "/src/styles/base/breakpoints" as breakpoints;
+@use "/src/styles/base/colors" as colors;
+@use "/src/styles/base/utilities" as utilities;
+@use "/src/styles/base/typography" as typography;
+@use "/src/styles/base/positions" as positions;
+
+.vicuid {
+  position: relative;
+  background-color: colors.$white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+
+  & > h2 {
+    padding: 6.5rem 2rem 3rem 2rem;
+    font-size: 28px;
+    font-family: typography.$typography50;
+    text-align: center;
+    position: relative;
+    color: #45b7e1;
+    &::before {
+      content: "";
+      position: absolute;
+      margin-left: -100px;
+      width: 60px;
+      height: 50px;
+      background: url("/img/mission/paws.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      margin-left: 40px;
+      width: 60px;
+      height: 50px;
+      background: url("/img/mission/paws.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      transform: rotate(270deg);
+    }
+  }
+  & > p {
+    font-size: 16px;
+    font-family: typography.$typography20;
+    color: colors.$black;
+    text-align: center;
+    line-height: 1px 1px colors.$black;
+    margin: 2rem 0;
+  }
+  &__player {
+    width: 100%;
+    // height: 600px;
+    @include utilities.renian-flexbox-param(flex, flex-end, center);
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    @include breakpoints.medium {
+      margin: 0 auto;
+    }
+    &Video {
+      height: 700px;
+      // max-height: 700px;
+      width: 100%;
+      @include utilities.renian-flexbox-param(flex, center, center);
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      // @include breakpoints.xl-large {
+      //   max-width: 17rem;
+      //   height: 13rem;
+      // }
+      // @include breakpoints.medium {
+      //   margin: 0 auto;
+      // }
+      &Preview {
+        position: absolute;
+        cursor: pointer;
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.85),
+            rgba(0, 0, 0, 0.85)
+          ),
+          url("/img/play-preview.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 1rem;
+        width: 100%;
+        height: 100%;
+        // height: 600px;
+        @include utilities.renian-flexbox-param(flex, center, center);
+      }
+    }
+    & > p {
+      width: 100%;
+      max-width: 32rem;
+      font-size: 13px;
+      font-family: typography.$typography20;
+      color: colors.$white;
+      text-align: end;
+      margin-top: 3rem;
+      line-height: 1px 1px colors.$black;
+      @include breakpoints.xl-large {
+        font-size: 11px;
+        margin-top: 1rem;
+      }
+
+      & > span {
+        font-family: typography.$typography40;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+.frametop {
+  width: 100%;
+  height: 6rem;
+  position: absolute;
+  top: -4px;
+  z-index: 10;
+  background: url("/img/main-frame.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
