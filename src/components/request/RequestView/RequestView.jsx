@@ -296,9 +296,9 @@ export const RequestView = () => {
                     Registry (W.A.R.) y asegurar su bienestar de por vida! En
                     los países donde operamos, ofrecemos un servicio:
                   </p>
-                  <h2 className="text-2xl font-bold">
+                  {/* <h2 className="text-2xl font-bold">
                     {t("Complete Registration")}:
-                  </h2>
+                  </h2> */}
                   <p>-----------------------------</p>
                   <ul className="font-semibold">
                     <li className="list-disc">
