@@ -386,5 +386,10 @@
   "The name must have at least 3 characters": "El nombre debe tener al menos 3 caracteres",
   "The name can have a maximum of 30 characters": "El nombre puede tener un máximo de 30 caracteres",
   "View Pet": "Ver Mascota",
-  "animal exploitation": "Explotación de animales"
+  "animal exploitation": "Explotación de animales",
+  "Does your pet already have an identification chip?": "¿Tu mascota ya tiene un chip de identificación?",
+  "and ensure its well-being for life! In the countries where we operate, we offer a service:" : "y asegura su bienestar de por vida! En los países donde operamos, ofrecemos un servicio:",
+  "Then it's the perfect time to register it": "Entonces es el momento perfecto para registrarlo",
+  "Yes": "Sí",
+  "No": "No"
 }

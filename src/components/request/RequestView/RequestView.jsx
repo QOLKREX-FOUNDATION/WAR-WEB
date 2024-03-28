@@ -26,10 +26,17 @@ const countriesAcepeted = [
   { label: "CHILE", value: "CL" },
   { label: "PERU", value: "PE" },
   { label: "MEXICO", value: "MX" },
+  { label: "HONDURAS", value: "HN" },
 ];
 
 export const RequestView = () => {
   const [step, setStep] = useState(1);
+  const [hasChip, setHasChip] = useState(null);
+  const [showQuestion, setShowQuestion] = useState(true);
+  const [planPrice, setPlanPrice] = useState({
+    label: "SOLO REGISTRO 8usd",
+    value: "SOLO REGISTRO S/.25",
+  });
   const { openModal, setOpenModal } = useModal();
   const { t } = useTranslation();
   const router = useRouter();
@@ -131,7 +138,7 @@ export const RequestView = () => {
     try {
       // 'http://localhost:5000/api/request/register-user'
       // const res = await fetch('https://firulaix-api-test.vercel.app/api/request/register-user', {
-      const res = await fetch(`${API.war}request/register-user`, {
+      const res = await fetch(`${API.war}request/register-user-war-chip`, {
         method: "POST",
         body: formData,
       });
@@ -240,6 +247,55 @@ export const RequestView = () => {
     { label: 'MEXICO', value: 'MX' },]
 */
 
+  const handleChangeHasChip = (e) => {
+    const hasChipValue = e.target.value === "yes";
+    setHasChip(hasChipValue);
+
+    const price = hasChipValue
+      ? {
+          label: "SOLO REGISTRO 8usd",
+          value: "SOLO REGISTRO S/.25",
+        }
+      : {
+          label: "REGISTRO COMPLETO 17usd",
+          value: "REGISTRO COMPLETO S/.60",
+        };
+    setPlanPrice(price);
+
+    setValue("typeService", price.value);
+
+    console.log(hasChipValue);
+    setShowQuestion(false);
+  };
+
+  const handleSendSRV = async() => {
+    console.log("send srv");
+    console.log(
+      watch("country"),
+      watch("person"),
+      watch("email"),
+      watch("phone"),
+      watch("document"),
+      watch("documentNumber"),
+    );
+    // const resp = await fetch(`${API.war}request/register-user-war-srv`, {
+    const resp = await fetch(`${API.war}/request/register-user-war-srv`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country: watch("country"),
+        person: watch("person"),
+        email: watch("email"),
+        phone: watch("phone"),
+        document: watch("document"),
+        document_number: watch("documentNumber"),
+      }),
+    });
+    console.log(resp);
+  };
+
   return (
     <>
       {openModal && (
@@ -271,54 +327,145 @@ export const RequestView = () => {
               />
             </div>
             <div className="flex flex-col lg:flex-row justify-start items-start lg:pb-0 max-w-xl lg:max-w-3xl w-full rounded-2xl min-h-[700px] mb-10">
+              {/* Left Panel */}
               <div className="flex flex-col items-center py-5 px-4 lg:w-1/3 bg-[#00a99d] min-h-[790px] rounded-l-2xl">
-                <Image
-                  src="/img/request/image-02.webp"
-                  alt="Picture of the author"
-                  width={50}
-                  height={50}
-                  className="object-cover"
-                />
-                <h2 className="text-xl font-bold text-white text-center lg:text-left pb-4">
-                  {t("THE REGISTRY OF WILD AND DOMESTIC ANIMALS")}
-                </h2>
-                <Image
-                  src="/img/request/recurso-116.webp"
-                  alt="Picture of the author"
-                  width={150}
-                  height={150}
-                  className="object-cover"
-                />
-                <div className="flex flex-col text-white px-4 ">
-                  <p>
-                    ¿Tu mascota ya tiene un chip de identificación? ¡Entonces es
-                    el momento perfecto para registrarla en el World Animal
-                    Registry (W.A.R.) y asegurar su bienestar de por vida! En
-                    los países donde operamos, ofrecemos un servicio:
-                  </p>
-                  {/* <h2 className="text-2xl font-bold">
-                    {t("Complete Registration")}:
-                  </h2> */}
-                  <p>-----------------------------</p>
-                  <ul className="font-semibold">
-                    <li className="list-disc">
-                      {t("Identification microchip")}
-                    </li>
-                    <li className="list-disc">
-                      {t("Registration in the W.A.R system")}
-                    </li>
-                    <li className="list-disc">{t("Adoption certification")}</li>
-                    {/* <li className="list-disc">
-                      {t("Veterinary consultation")}
+                {showQuestion && (
+                  <>
+                    <Image
+                      src="/img/request/image-02.webp"
+                      alt="Picture of the author"
+                      width={50}
+                      height={50}
+                      className="object-cover"
+                    />
+                    <h2 className="text-xl font-bold text-white text-center lg:text-left pb-4">
+                      ¡Bienvenido al World Animal Registry (W.A.R.)!
+                    </h2>
+                    <Image
+                      src="/img/request/recurso-116.webp"
+                      alt="Picture of the author"
+                      width={150}
+                      height={150}
+                      className="object-cover"
+                    />
+                    <div className="flex flex-col text-white px-4">
+                      <p className="mt-5">
+                        ¡Registra a tu mascota ahora y únete a nuestra comunidad
+                        global comprometida con la seguridad y el bienestar de
+                        todos los animales!
+                      </p>
                       <br />
-                      <span className="text-sm">
-                        ({t("Main office headquarters Jesús María - Lima Peru")}
-                        )
-                      </span>
-                    </li> */}
-                  </ul>
-                  <p>-----------------------------</p>
-                </div>
+                      <p>
+                        Obten su certificado de adopción, su carné de
+                        identificación y un identificador virtual único que
+                        puede imprimir o colocar en su collar.
+                      </p>
+                      {/* <div className="flex flex-col gap-3 mt-5">
+                        <label
+                          htmlFor="yes"
+                          className="flex items-center gap-2"
+                        >
+                          <input
+                            type="radio"
+                            id="yes"
+                            value="yes"
+                            className="mr-2"
+                            onChange={handleChangeHasChip}
+                          />
+                          <span>{t("Yes")}</span>
+                        </label>
+                        <label htmlFor="no" className="flex items-center gap-2">
+                          <input
+                            type="radio"
+                            id="no"
+                            value="no"
+                            className="mr-2"
+                            onChange={handleChangeHasChip}
+                          />
+                          <span>{t("No")}</span>
+                        </label>
+                      </div> */}
+                    </div>
+                  </>
+                )}
+                {!showQuestion && (
+                  <>
+                    <Image
+                      src="/img/request/image-02.webp"
+                      alt="Picture of the author"
+                      width={50}
+                      height={50}
+                      className="object-cover"
+                    />
+                    <h2 className="text-xl font-bold text-white text-center pb-4">
+                      {t("THE REGISTRY OF WILD AND DOMESTIC ANIMALS")}
+                    </h2>
+                    <Image
+                      src="/img/request/recurso-116.webp"
+                      alt="Picture of the author"
+                      width={150}
+                      height={150}
+                      className="object-cover"
+                    />
+                    <div className="flex flex-col text-white px-4 ">
+                      <p>
+                        ¿Tu mascota ya tiene un chip de identificación?
+                        ¡Entonces es el momento perfecto para registrarla en el
+                        World Animal Registry (W.A.R.) y asegurar su bienestar
+                        de por vida! En los países donde operamos, ofrecemos un
+                        servicio:
+                      </p>
+                      {/* <h2 className="text-2xl font-bold">
+                        {t("Complete Registration")}:
+                      </h2> */}
+                      <p>-----------------------------</p>
+                      <ul className="font-semibold">
+                        {hasChip ? (
+                          <>
+                            <li className="list-disc">
+                              {t("Identification microchip")}
+                            </li>
+                            <li className="list-disc">
+                              {t("Registration in the W.A.R system")}
+                            </li>
+                            <li className="list-disc">
+                              {t("Adoption certification")}
+                            </li>
+                          </>
+                        ) : (
+                          <>
+                            <li className="list-disc">
+                              {t("Registration in the W.A.R system")}
+                            </li>
+                            <li className="list-disc">
+                              {t("Adoption certification")}
+                            </li>
+                            <li className="list-disc">
+                              {t("Veterinary consultation")}
+                              <br />
+                              <span className="text-sm">
+                                (
+                                {t(
+                                  "Main office headquarters Jesús María - Lima Peru"
+                                )}
+                                )
+                              </span>
+                            </li>
+                          </>
+                        )}
+                        {/* <li className="list-disc">
+                          {t("Veterinary consultation")}
+                          <br />
+                          <span className="text-sm">
+                            ({t("Main office headquarters Jesús María - Lima Peru")}
+                            )
+                          </span>
+                        </li> */}
+                      </ul>
+                      <p>-----------------------------</p>
+                    </div>
+                  </>
+                )}
                 {/* <div className="flex flex-col text-white px-4 ">
                   <h2 className="text-2xl font-bold">
                     {t("Registration Only")}:
@@ -341,72 +488,120 @@ export const RequestView = () => {
                 {/* <p>-----------------------------</p> */}
                 {/* </div> */}
               </div>
-              {/* form */}
-              <div className="flex flex-col w-full lg:w-2/3 border">
-                <form
-                  ref={refForm}
-                  onSubmit={handleSubmit(onSubmit)}
-                  className=" flex flex-col items-center gap-3 w-full h-full py-10 px-5 rounded-r-2xl"
-                >
-                  <div className="flex">
-                    <button
-                      type="button"
-                      className={`text-white w-12 h-12 rounded-full font-bold ${
-                        step === 1 ? "bg-[#29abe2]" : "bg-[#4ab9e9]"
-                      }`}
-                    >
-                      1
-                    </button>
-                    <div className="w-10 h-2 bg-white mt-4"></div>
-                    <button
-                      type="button"
-                      className={`text-white w-12 h-12 rounded-full font-bold ${
-                        step === 2 ? "bg-[#29abe2]" : "bg-[#4ab9e9]"
-                      }`}
-                    >
-                      2
-                    </button>
+              {/* end of left panel */}
+              {
+                showQuestion && (
+                  <div className="flex flex-col w-full lg:w-2/3 border">
+                    <div className="flex flex-col items-center gap-3 w-full h-full py-10 px-5 rounded-r-2xl">
+                      <h2 className="text-2xl font-bold text-[#00a99d] text-center ">
+                        ¿Tu mascota ya tiene un chip de identificación ?{" "}
+                      </h2>
+                      <p className=" text-justify">
+                        Estamos comprometidos en garantizar la seguridad y
+                        protección de tu compañero peludo. Si tu mascota ya
+                        tiene un chip, regístralo con nosotros. ¡Es fácil y
+                        rápido!
+                      </p>
+                      <button
+                        type="button"
+                        className="bg-[#29abe2] text-white rounded-xl h-10 font-bold px-4 mr-2"
+                        onClick={handleChangeHasChip}
+                        value="yes"
+                      >
+                        <span>Si</span>
+                      </button>
+                    </div>
+                    <div className="flex flex-col items-center gap-3 w-full h-full py-3 px-5 rounded-r-2xl">
+                      <h2 className="text-2xl font-bold text-[#00a99d] text-center ">
+                        ¿Tu mascota no tiene un chip?
+                      </h2>
+                      <p className="text-justify ">
+                        ¡No te preocupes! El registro en el W.A.R. es una de las
+                        mejores decisiones que puedes tomar para asegurar que tu
+                        mascota esté protegida y pueda ser identificada
+                        rápidamente. ¡Regístrala ahora!
+                      </p>
+                      <button
+                        type="button"
+                        className="bg-[#29abe2] text-white rounded-xl h-10 font-bold px-4 mr-2"
+                        onClick={handleChangeHasChip}
+                        value="no"
+                      >
+                        <span>No</span>
+                      </button>
+                    </div>
                   </div>
-                  {/* step 1 form */}
-                  <div
-                    className={`w-full flex flex-col py-3 gap-3 ${
-                      step === 1
-                        ? "opacity-100 z-10"
-                        : "opacity-0 -z-20 absolute overflow-hidden w-0"
-                    }`}
+                ) // end of right panel
+              }
+              {/* form */}
+              {!showQuestion && (
+                <div className="flex flex-col w-full lg:w-2/3 border">
+                  <form
+                    ref={refForm}
+                    onSubmit={handleSubmit(onSubmit)}
+                    className=" flex flex-col items-center gap-3 w-full h-full py-10 px-5 rounded-r-2xl"
                   >
-                    <h2>{t("Identification")}</h2>
-                    <ReactSelectComponent
-                      name={t("country")}
-                      property="country"
-                      options={countriesAcepeted.sort((a, b) =>
-                        a.label > b.label ? 1 : -1
-                      )}
-                      values={register}
-                      watch={watch}
-                      setValue={setValue}
-                      error={errors}
-                      required
-                    />
-                    <ModalInputComponent
-                      name={t("Email")}
-                      type="email"
-                      property="email"
-                      values={register}
-                      error={errors}
-                      required
-                    />
+                    {hasChip && (
+                      <div className="flex">
+                        <button
+                          type="button"
+                          className={`text-white w-12 h-12 rounded-full font-bold ${
+                            step === 1 ? "bg-[#29abe2]" : "bg-[#4ab9e9]"
+                          }`}
+                        >
+                          1
+                        </button>
+                        <div className="w-10 h-2 bg-white mt-4"></div>
+                        <button
+                          type="button"
+                          className={`text-white w-12 h-12 rounded-full font-bold ${
+                            step === 2 ? "bg-[#29abe2]" : "bg-[#4ab9e9]"
+                          }`}
+                        >
+                          2
+                        </button>
+                      </div>
+                    )}
+                    {/* step 1 form */}
+                    <div
+                      className={`w-full flex flex-col py-3 gap-3 ${
+                        step === 1
+                          ? "opacity-100 z-10"
+                          : "opacity-0 -z-20 absolute overflow-hidden w-0"
+                      }`}
+                    >
+                      <h2>{t("Identification")}</h2>
+                      <ReactSelectComponent
+                        name={t("country")}
+                        property="country"
+                        options={countriesAcepeted.sort((a, b) =>
+                          a.label > b.label ? 1 : -1
+                        )}
+                        values={register}
+                        watch={watch}
+                        setValue={setValue}
+                        error={errors}
+                        required
+                      />
+                      <ModalInputComponent
+                        name={t("Email")}
+                        type="email"
+                        property="email"
+                        values={register}
+                        error={errors}
+                        required
+                      />
 
-                    <ModalInputComponent
-                      name={`${t("Phone number")} (${watch("phone").length})`}
-                      type="number"
-                      property="phone"
-                      values={register}
-                      error={errors}
-                      required
-                    />
+                      <ModalInputComponent
+                        name={`${t("Phone number")} (${watch("phone").length})`}
+                        type="number"
+                        property="phone"
+                        values={register}
+                        error={errors}
+                        required
+                      />
 
-                    {/* <ReactSelectComponent
+                      {/* <ReactSelectComponent
                                             name={t("kind of person")}
                                             property="person"
                                             options={persons}
@@ -417,33 +612,36 @@ export const RequestView = () => {
                                             required
                                         /> */}
 
-                    <ReactSelectComponent
-                      name={t("Type Document")}
-                      property="document"
-                      options={[
-                        { label: "DNI (Documento de identidad)", value: "DNI" },
-                        { label: "CE", value: "CE" },
-                        { label: "PASAPORTE", value: "PASAPORTE" },
-                      ]}
-                      values={register}
-                      watch={watch}
-                      setValue={setValue}
-                      error={errors}
-                      required
-                    />
+                      <ReactSelectComponent
+                        name={t("Type Document")}
+                        property="document"
+                        options={[
+                          {
+                            label: "DNI (Documento de identidad)",
+                            value: "DNI",
+                          },
+                          { label: "CE", value: "CE" },
+                          { label: "PASAPORTE", value: "PASAPORTE" },
+                        ]}
+                        values={register}
+                        watch={watch}
+                        setValue={setValue}
+                        error={errors}
+                        required
+                      />
 
-                    <ModalInputComponent
-                      name={`${t("Number Document")} (${
-                        watch("documentNumber").length
-                      })`}
-                      type="number"
-                      property="documentNumber"
-                      values={register}
-                      error={errors}
-                      required
-                    />
+                      <ModalInputComponent
+                        name={`${t("Number Document")} (${
+                          watch("documentNumber").length
+                        })`}
+                        type="number"
+                        property="documentNumber"
+                        values={register}
+                        error={errors}
+                        required
+                      />
 
-                    {/* <ReactSelectComponent
+                      {/* <ReactSelectComponent
                       name={t("Type Adopter")}
                       property="type"
                       options={types}
@@ -453,7 +651,7 @@ export const RequestView = () => {
                       error={errors}
                       required
                     /> */}
-                    {/* {
+                      {/* {
                       <div className="relative -top-2 left-1">
                         {watch("type") === "ADOPTER" && (
                           <span className="text-sm text-gray-600">
@@ -478,77 +676,93 @@ export const RequestView = () => {
                       </div>
                     } */}
 
-                    <ReactSelectComponent
-                      name={t("Type Service")}
-                      property="typeService"
-                      isDisabled
-                      options={[
-                        // { label: "REGISTRO COMPLETO 17usd", value: "REGISTRO COMPLETO S/.60" },
-                        // { label: "SOLO REGISTRO 8.5usd", value: "SOLO REGISTRO S/.25" },
-                        {
-                          label: "SOLO REGISTRO 8usd",
-                          value: "SOLO REGISTRO S/.25",
-                        },
-                      ]}
-                      values={register}
-                      value={{
-                        label: "SOLO REGISTRO 8usd",
-                        value: "SOLO REGISTRO S/.25",
-                      }}
-                      watch={watch}
-                      setValue={setValue}
-                      error={errors}
-                      // required
-                    />
-                    {
-                      <div className="relative -top-2 left-1">
-                        {watch("typeService") === "REGISTRO COMPLETO S/.60" && (
-                          <span className="text-sm text-gray-600">
-                            (Incluye: Microchip de identificación, Registro en
-                            el sistema de W.A.R, Certificación de adopción,
-                            Consulta veterinaria)
-                          </span>
-                        )}
-                        {watch("typeService") === "SOLO REGISTRO S/.25" && (
-                          <span className="text-sm text-gray-600">
-                            (Incluye: Registro en el sistema de W.A.R,
-                            Certificación de adopción, Consulta veterinaria)
-                          </span>
-                        )}
-                      </div>
-                    }
-                    <button
-                      type="button"
-                      className="bg-[#29abe2] text-white rounded-xl h-10 font-bold disabled:opacity-50"
-                      onClick={handleNextStep}
-                      disabled={
-                        watch("email") === "" ||
-                        watch("phone") === "" ||
-                        watch("country") === "" ||
-                        watch("person") === "" ||
-                        watch("document") === "" ||
-                        watch("documentNumber") === "" ||
-                        watch("type") === "" ||
-                        watch("typeService") === ""
+                      {hasChip && (
+                        <ReactSelectComponent
+                          name={t("Type Service")}
+                          property="typeService"
+                          isDisabled
+                          options={[
+                            {
+                              label: "REGISTRO COMPLETO 17usd",
+                              value: "REGISTRO COMPLETO S/.60",
+                            },
+                            // { label: "SOLO REGISTRO 8.5usd", value: "SOLO REGISTRO S/.25" },
+                            {
+                              label: "SOLO REGISTRO 8usd",
+                              value: "SOLO REGISTRO S/.25",
+                            },
+                          ]}
+                          values={register}
+                          value={planPrice}
+                          watch={watch}
+                          setValue={setValue}
+                          error={errors}
+                          // required
+                        />
+                      )}
+                      {
+                        <div className="relative -top-2 left-1">
+                          {watch("typeService") ===
+                            "REGISTRO COMPLETO S/.60" && (
+                            <span className="text-sm text-gray-600">
+                              (Incluye: Microchip de identificación, Registro en
+                              el sistema de W.A.R, Certificación de adopción,
+                              Consulta veterinaria)
+                            </span>
+                          )}
+                          {watch("typeService") === "SOLO REGISTRO S/.25" && (
+                            <span className="text-sm text-gray-600">
+                              (Incluye: Registro en el sistema de W.A.R,
+                              Certificación de adopción, Consulta veterinaria)
+                            </span>
+                          )}
+                        </div>
                       }
+                      {hasChip && (
+                        <button
+                          type="button"
+                          className="bg-[#29abe2] text-white rounded-xl h-10 font-bold disabled:opacity-50"
+                          onClick={handleNextStep}
+                          disabled={
+                            watch("email") === "" ||
+                            watch("phone") === "" ||
+                            watch("country") === "" ||
+                            watch("person") === "" ||
+                            watch("document") === "" ||
+                            watch("documentNumber") === "" ||
+                            watch("type") === "" ||
+                            watch("typeService") === ""
+                          }
+                        >
+                          {t("Continue")}
+                        </button>
+                      )}
+                      {
+                        !hasChip && (
+                          <button
+                            type="button"
+                            className="bg-[#29abe2] text-white rounded-xl h-10 font-bold capitalize"
+                            onClick={handleSendSRV}
+                          >
+                            {t("send")}
+                          </button>
+                        ) // end of step 1 form
+                      }
+                    </div>
+                    {/* step 2 form */}
+                    <div
+                      className={`flex flex-col gap-3 w-full ${
+                        step === 1
+                          ? "opacity-0 -z-20 absolute overflow-hidden w-0"
+                          : "opacity-100 z-10"
+                      }`}
                     >
-                      {t("Continue")}
-                    </button>
-                  </div>
-                  {/* step 2 form */}
-                  <div
-                    className={`flex flex-col gap-3 w-full ${
-                      step === 1
-                        ? "opacity-0 -z-20 absolute overflow-hidden w-0"
-                        : "opacity-100 z-10"
-                    }`}
-                  >
-                    <div className="flex flex-col">
-                      <h2 className="text-lg font-semibold">
-                        {t("Payment information")}
-                      </h2>
-                      {/* transferncia */}
-                      {/* <div className="flex flex-col justify-between">
+                      <div className="flex flex-col">
+                        <h2 className="text-lg font-semibold">
+                          {t("Payment information")}
+                        </h2>
+                        {/* transferncia */}
+                        {/* <div className="flex flex-col justify-between">
                                                 <label htmlFor="tranferencia">
                                                     <input
                                                         type="radio"
@@ -649,45 +863,45 @@ export const RequestView = () => {
 
                                             } */}
 
-                      {/* tarjeta */}
-                      <div className="flex flex-col justify-between pt-3 pb-3">
-                        <label htmlFor="tarjeta">
-                          <input
-                            type="radio"
-                            id="tarjeta"
-                            value="tarjeta"
-                            className="mr-2"
-                            // defaultChecked
-                            {...register("paymentMethod", {
-                              required: "Este campo es requerido",
-                            })}
-                            onClick={handlePaymentMethod}
-                          />
-                          {t(
-                            "Tarjeta de Crédito Visa, Master Card, American Express, Diners"
-                          )}
-                          {/* (comisión de S/3.33) */}
-                        </label>
-                        <p className="bg-gray-200  p-3 rounded-lg">
-                          {t(
-                            "Our payment gateway is intuitive and easy to use. Simply select ('New Card') as your payment method when making your registration request. Next, enter your card details, including the number, expiration date, and security code. Once you verify the information, you can confirm your transaction and receive a thank you notification."
-                          )}
-                          .
-                        </p>
+                        {/* tarjeta */}
+                        <div className="flex flex-col justify-between pt-3 pb-3">
+                          <label htmlFor="tarjeta">
+                            <input
+                              type="radio"
+                              id="tarjeta"
+                              value="tarjeta"
+                              className="mr-2"
+                              // defaultChecked
+                              {...register("paymentMethod", {
+                                required: "Este campo es requerido",
+                              })}
+                              onClick={handlePaymentMethod}
+                            />
+                            {t(
+                              "Tarjeta de Crédito Visa, Master Card, American Express, Diners"
+                            )}
+                            {/* (comisión de S/3.33) */}
+                          </label>
+                          <p className="bg-gray-200  p-3 rounded-lg">
+                            {t(
+                              "Our payment gateway is intuitive and easy to use. Simply select ('New Card') as your payment method when making your registration request. Next, enter your card details, including the number, expiration date, and security code. Once you verify the information, you can confirm your transaction and receive a thank you notification."
+                            )}
+                            .
+                          </p>
+                        </div>
                       </div>
-                    </div>
 
-                    {watch("paymentMethod") === "tarjeta" && (
-                      <div className="flex flex-col gap-2">
-                        <h2 className="font-bold">{t("Pay by Card")}</h2>
-                        {/* <button
+                      {watch("paymentMethod") === "tarjeta" && (
+                        <div className="flex flex-col gap-2">
+                          <h2 className="font-bold">{t("Pay by Card")}</h2>
+                          {/* <button
                                                     type='button'
                                                     className="bg-[#29abe2] text-white rounded-xl h-10 font-bold"
                                                     onClick={handlePaymentMethod}
                                                 >
                                                     {t("Go to Cash Payment")}
                                                 </button> */}
-                        {/* <div className="flex flex-col gap-3">
+                          {/* <div className="flex flex-col gap-3">
                                                 <label htmlFor="photo" className='bg-gray-400 px-5 py-2 flex justify-center items-center gap-2 rounded-xl hover:cursor-pointer max-w-xs text-white'>
                                                     <span>
                                                         {t("Enter photo of the transfer")}
@@ -718,12 +932,12 @@ export const RequestView = () => {
                                                     )
                                                 }
                                             </div> */}
-                      </div>
-                    )}
+                        </div>
+                      )}
 
-                    {/* pago con tarjeta */}
+                      {/* pago con tarjeta */}
 
-                    {/* {
+                      {/* {
                                             watch('paymentMethod') === 'tarjeta' &&
                                             (
                                                 <>
@@ -747,52 +961,54 @@ export const RequestView = () => {
                                                 </>
                                             )
                                         } */}
-                  </div>
-                </form>
-                {step === 2 && (
-                  <>
-                    <div className="flex justify-center">
-                      {watch("paymentMethod") === "tarjeta" &&
-                        watch("country") !== "" &&
-                        watch("person") !== "" &&
-                        watch("type") !== "" &&
-                        watch("document") !== "" &&
-                        watch("typeService") !== "" &&
-                        watch("documentNumber") !== "" &&
-                        showForm && (
-                          <ModalForm
-                            info={{
-                              country: watch("country"),
-                              person: watch("person"),
-                              email: watch("email"),
-                              phone: watch("phone"),
-                              type: watch("type"),
-                              typeService: watch("typeService"),
-                              image: watch("image"),
-                              document: watch("document"),
-                              documentNumber: watch("documentNumber"),
-                              paymentMethod: watch("paymentMethod"),
-                            }}
-                            url={
-                              watch("typeService") == "REGISTRO COMPLETO S/.60"
-                                ? `${API.war}payment/create-order`
-                                : `${API.war}payment/create-order-2`
-                            }
-                          />
-                        )}
                     </div>
-                    <div className="flex justify-center px-5">
-                      <button
-                        type="button"
-                        className="bg-[#29abe2] text-white rounded-xl h-10 font-bold w-full capitalize"
-                        onClick={handlePrevStep}
-                      >
-                        {t("back")}
-                      </button>
-                    </div>
-                  </>
-                )}
-              </div>
+                  </form>
+                  {step === 2 && (
+                    <>
+                      <div className="flex justify-center">
+                        {watch("paymentMethod") === "tarjeta" &&
+                          watch("country") !== "" &&
+                          watch("person") !== "" &&
+                          watch("type") !== "" &&
+                          watch("document") !== "" &&
+                          watch("typeService") !== "" &&
+                          watch("documentNumber") !== "" &&
+                          showForm && (
+                            <ModalForm
+                              info={{
+                                country: watch("country"),
+                                person: watch("person"),
+                                email: watch("email"),
+                                phone: watch("phone"),
+                                type: watch("type"),
+                                typeService: watch("typeService"),
+                                image: watch("image"),
+                                document: watch("document"),
+                                documentNumber: watch("documentNumber"),
+                                paymentMethod: watch("paymentMethod"),
+                              }}
+                              url={
+                                watch("typeService") ==
+                                "REGISTRO COMPLETO S/.60"
+                                  ? `${API.war}payment/create-order`
+                                  : `${API.war}payment/create-order-2`
+                              }
+                            />
+                          )}
+                      </div>
+                      <div className="flex justify-center px-5">
+                        <button
+                          type="button"
+                          className="bg-[#29abe2] text-white rounded-xl h-10 font-bold w-full capitalize"
+                          onClick={handlePrevStep}
+                        >
+                          {t("back")}
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -800,3 +1016,77 @@ export const RequestView = () => {
     </>
   );
 };
+
+// /*
+// <div className="flex flex-col items-center py-5 px-4 lg:w-1/3 bg-[#00a99d] min-h-[790px] rounded-l-2xl">
+//                 <Image
+//                   src="/img/request/image-02.webp"
+//                   alt="Picture of the author"
+//                   width={50}
+//                   height={50}
+//                   className="object-cover"
+//                 />
+//                 <h2 className="text-xl font-bold text-white text-center lg:text-left pb-4">
+//                   {t("THE REGISTRY OF WILD AND DOMESTIC ANIMALS")}
+//                 </h2>
+//                 <Image
+//                   src="/img/request/recurso-116.webp"
+//                   alt="Picture of the author"
+//                   width={150}
+//                   height={150}
+//                   className="object-cover"
+//                 />
+//                 <div className="flex flex-col text-white px-4 ">
+//                   <p>
+//                     ¿Tu mascota ya tiene un chip de identificación? ¡Entonces es
+//                     el momento perfecto para registrarla en el World Animal
+//                     Registry (W.A.R.) y asegurar su bienestar de por vida! En
+//                     los países donde operamos, ofrecemos un servicio:
+//                   </p>
+//                   {/* <h2 className="text-2xl font-bold">
+//                     {t("Complete Registration")}:
+//                   </h2> */}
+//                   <p>-----------------------------</p>
+//                   <ul className="font-semibold">
+//                     <li className="list-disc">
+//                       {t("Identification microchip")}
+//                     </li>
+//                     <li className="list-disc">
+//                       {t("Registration in the W.A.R system")}
+//                     </li>
+//                     <li className="list-disc">{t("Adoption certification")}</li>
+//                     {/* <li className="list-disc">
+//                       {t("Veterinary consultation")}
+//                       <br />
+//                       <span className="text-sm">
+//                         ({t("Main office headquarters Jesús María - Lima Peru")}
+//                         )
+//                       </span>
+//                     </li> */}
+//                   </ul>
+//                   <p>-----------------------------</p>
+//                 </div>
+//                 {/* <div className="flex flex-col text-white px-4 ">
+//                   <h2 className="text-2xl font-bold">
+//                     {t("Registration Only")}:
+//                   </h2>
+//                   <p>-----------------------------</p>
+//                   <ul className="font-semibold">
+//                     <li className="list-disc">
+//                       {t("Registration in the W.A.R system")}
+//                     </li>
+//                     <li className="list-disc">{t("Adoption certification")}</li>
+//                     <li className="list-disc">
+//                       {t("Veterinary consultation")}
+//                       <br />
+//                       <span className="text-sm">
+//                         ({t("Main office headquarters Jesús María - Lima Peru")}
+//                         )
+//                       </span>
+//                     </li>
+//                   </ul> */}
+//                 {/* <p>-----------------------------</p> */}
+//                 {/* </div> */}
+//               </div>
+
+// */

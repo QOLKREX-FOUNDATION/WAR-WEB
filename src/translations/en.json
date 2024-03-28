@@ -383,5 +383,10 @@
   "The name must have at least 3 characters": "The name must have at least 3 characters",
   "The name can have a maximum of 30 characters": "The name can have a maximum of 30 characters",
   "View Pet": "View Pet",
-  "animal exploitation": "Animal exploitation"
+  "animal exploitation": "Animal exploitation",
+  "Does your pet already have an identification chip?" : "Does your pet already have an identification chip?",
+  "and ensure its well-being for life! In the countries where we operate, we offer a service:" : "and ensure its well-being for life! In the countries where we operate, we offer a service:",
+  "Then it's the perfect time to register it" : "Then it's the perfect time to register it",
+  "Yes": "Yes",
+  "No": "No"
 }
