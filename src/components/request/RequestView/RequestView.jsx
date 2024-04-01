@@ -28,6 +28,10 @@ const countriesAcepeted = [
   { label: "MEXICO", value: "MX" },
   { label: "HONDURAS", value: "HN" },
 ];
+const countriesAcepetedWithoutChip = [
+  { label: "PERU", value: "PE" },
+  { label: "HONDURAS", value: "HN" },
+];
 
 export const RequestView = () => {
   const [step, setStep] = useState(1);
@@ -574,9 +578,15 @@ export const RequestView = () => {
                       <ReactSelectComponent
                         name={t("country")}
                         property="country"
-                        options={countriesAcepeted.sort((a, b) =>
-                          a.label > b.label ? 1 : -1
-                        )}
+                        options={
+                          hasChip
+                            ? countriesAcepeted.sort((a, b) =>
+                                a.label > b.label ? 1 : -1
+                              )
+                            : countriesAcepetedWithoutChip.sort((a, b) =>
+                                a.label > b.label ? 1 : -1
+                              )
+                        }
                         values={register}
                         watch={watch}
                         setValue={setValue}
