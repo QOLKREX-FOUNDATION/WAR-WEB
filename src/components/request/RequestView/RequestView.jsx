@@ -348,7 +348,7 @@ export const RequestView = () => {
                       height={150}
                       className="object-cover"
                     />
-                    <div className="flex flex-col text-white px-4">
+                    <div className="flex flex-col text-white px-4 text-justify">
                       <p className="mt-5">
                         ¡Registra a tu mascota ahora y únete a nuestra comunidad
                         global comprometida con la seguridad y el bienestar de
@@ -990,8 +990,8 @@ export const RequestView = () => {
                               url={
                                 watch("typeService") ==
                                 "REGISTRO COMPLETO S/.60"
-                                  ? `${API.war}payment/create-order`
-                                  : `${API.war}payment/create-order-2`
+                                  ? `${API.war}payment/war-create-order`
+                                  : `${API.war}payment/war-create-order-2`
                               }
                             />
                           )}
