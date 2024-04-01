@@ -330,9 +330,9 @@ export const RequestView = () => {
                 className="object-cover absolute top-0 left-0"
               />
             </div>
-            <div className="flex flex-col lg:flex-row justify-start items-start lg:pb-0 max-w-xl lg:max-w-3xl w-full rounded-2xl min-h-[700px] mb-10">
+            <div className="flex flex-col lg:flex-row justify-start items-start lg:pb-0 max-w-xl lg:max-w-3xl w-full rounded-2xl h-auto md:min-h-[700px] mb-10">
               {/* Left Panel */}
-              <div className="flex flex-col items-center py-5 px-4 lg:w-1/3 bg-[#00a99d] min-h-[790px] rounded-l-2xl">
+              <div className="flex flex-col items-center py-5 px-4 lg:w-1/3 bg-[#00a99d] h-auto md:min-h-[790px] rounded-l-2xl">
                 {showQuestion && (
                   <>
                     <Image
