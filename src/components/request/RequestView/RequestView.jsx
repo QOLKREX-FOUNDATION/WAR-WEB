@@ -499,39 +499,59 @@ export const RequestView = () => {
                     <div className="flex flex-col items-center justify-center py-10 gap-3 w-full h-full  px-5 rounded-r-2xl">
                       <button
                         type="button"
-                        className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-2 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-ou hover:opacity-80"
+                        className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-3 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-out hover:opacity-80 flex items-center justify-center"
                         onClick={handleChangeHasChip}
                         value="yes"
                       >
-                        <>
-                          <h2 className="text-2xl font-bold text-[#fff] text-center ">
-                            ¿Tu mascota ya tiene un chip de identificación ?{" "}
-                          </h2>
-                          <p className=" text-justify">
-                            Estamos comprometidos en garantizar la seguridad y
-                            protección de tu compañero peludo. Si tu mascota ya
-                            tiene un chip, regístralo con nosotros. ¡Es fácil y
-                            rápido!
-                          </p>
-                        </>
+                        <div className="flex gap-5 items-center">
+                          <div>
+                            <h2 className="text-2xl font-bold text-[#fff] text-center">
+                              ¿Tu mascota ya tiene un chip de identificación?
+                            </h2>
+                            <p className="text-justify font-normal">
+                              Estamos comprometidos en garantizar la seguridad y
+                              protección de tu compañero peludo. Si tu mascota
+                              ya tiene un chip, regístralo con nosotros. ¡Es
+                              fácil y rápido!
+                            </p>
+                          </div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 320 512"
+                            className="w-20 h-20 fill-current text-white font-normal"
+                          >
+                            <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                          </svg>
+                        </div>
                       </button>
                     </div>
                     <div className="flex flex-col items-center gap-3 w-full h-full py-3 px-5 rounded-r-2xl">
                       <button
                         type="button"
-                        className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-2 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-ou hover:opacity-80"
+                        className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-3 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-ou hover:opacity-80"
                         onClick={handleChangeHasChip}
                         value="no"
                       >
-                        <h2 className="text-2xl font-bold text-[#fff] text-center ">
-                          ¿Tu mascota no tiene un chip?
-                        </h2>
-                        <p className="text-justify ">
-                          ¡No te preocupes! El registro en el W.A.R. es una de
-                          las mejores decisiones que puedes tomar para asegurar
-                          que tu mascota esté protegida y pueda ser identificada
-                          rápidamente. ¡Regístrala ahora!
-                        </p>
+                        <div className="flex gap-5 items-center">
+                          <div>
+                            <h2 className="text-2xl font-bold text-[#fff] text-center ">
+                              ¿Tu mascota no tiene un chip?
+                            </h2>
+                            <p className="text-justify font-normal">
+                              ¡No te preocupes! El registro en el W.A.R. es una
+                              de las mejores decisiones que puedes tomar para
+                              asegurar que tu mascota esté protegida y pueda ser
+                              identificada rápidamente. ¡Regístrala ahora!
+                            </p>
+                          </div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 320 512"
+                            className="w-24 h-24 fill-current text-white"
+                          >
+                            <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                          </svg>
+                        </div>
                       </button>
                     </div>
                   </div>
