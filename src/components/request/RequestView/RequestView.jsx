@@ -313,7 +313,7 @@ export const RequestView = () => {
             } */}
       <>
         <div className="flex items-center w-full min-h-[72vh]">
-          <div className="w-full flex flex-col items-center lg:flex-row justify-center px-14 gap-20">
+          <div className="w-full flex flex-col items-center lg:flex-row justify-center px-5 md:px-14 gap-20">
             <div className="flex relative max-w-2xl">
               <Image
                 src="/img/request/recurso-159.webp"
@@ -499,7 +499,7 @@ export const RequestView = () => {
                     <div className="flex flex-col items-center justify-center py-10 gap-3 w-full h-full  px-5 rounded-r-2xl">
                       <button
                         type="button"
-                        className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-3 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-out hover:opacity-80 flex items-center justify-center"
+                        className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-3 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-out hover:opacity-80 flex items-center justify-center w-full h-auto"
                         onClick={handleChangeHasChip}
                         value="yes"
                       >
@@ -528,7 +528,7 @@ export const RequestView = () => {
                     <div className="flex flex-col items-center gap-3 w-full h-full py-3 px-5 rounded-r-2xl">
                       <button
                         type="button"
-                        className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-3 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-ou hover:opacity-80"
+                        className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-3 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-ou hover:opacity-80 w-full"
                         onClick={handleChangeHasChip}
                         value="no"
                       >
