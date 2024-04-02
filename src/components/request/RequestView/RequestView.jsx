@@ -850,7 +850,7 @@ export const RequestView = () => {
                                 watch("phone") === "" ||
                                 watch("document") === "" ||
                                 watch("documentNumber") === "" ||
-                                isLoading
+                                isLoading === true
                               }
                             >
                               {t("send")}
