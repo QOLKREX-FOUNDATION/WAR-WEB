@@ -268,6 +268,14 @@ export const RequestView = () => {
   };
 
   const handleSendSRV = async () => {
+    const recaptchaValue = recaptchaRef.current.getValue();
+    console.log("verify", recaptchaValue);
+    if (!recaptchaValue) {
+      toast.error("Por favor complete el captcha", {
+        theme: "colored",
+      });
+      return;
+    }
     try {
       console.log("send srv");
       console.log(
@@ -805,6 +813,14 @@ export const RequestView = () => {
                       {
                         !hasChip && (
                           <>
+                            <ReCAPTCHA
+                              ref={recaptchaRef}
+                              size="normal"
+                              sitekey={
+                                process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+                              }
+                              onChange={onReCAPTCHAChange}
+                            />
                             <button
                               type="button"
                               className="bg-[#29abe2] text-white rounded-xl h-10 font-bold capitalize disabled:opacity-50"
