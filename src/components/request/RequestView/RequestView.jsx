@@ -19,6 +19,7 @@ import { ModalForm } from "../ModalForm";
 import { useRouter } from "next/router";
 import { MessageStatus } from "../MessageStatus";
 import { API } from "../../../config";
+import Swal from "sweetalert2";
 
 const countriesAcepeted = [
   { label: "COLOMBIA", value: "CO" },
@@ -243,16 +244,10 @@ export const RequestView = () => {
   console.log(watch("paymentMethod"));
 
   console.log(countries);
-  /*
-    [{ label: 'COLOMBIA', value: 'CO' },
-    { label: 'ECUADOR', value: 'EC' },
-    { label: 'PERU', value: 'PE' },
-    { label: 'CHILE', value: 'CL' },
-    { label: 'MEXICO', value: 'MX' },]
-*/
 
-  const handleChangeHasChip = (e) => {
-    const hasChipValue = e.target.value === "yes";
+  const handleChangeHasChip = (value) => {
+    const hasChipValue = value === "yes";
+    console.log(hasChipValue);
     setHasChip(hasChipValue);
 
     const price = hasChipValue
@@ -273,31 +268,44 @@ export const RequestView = () => {
   };
 
   const handleSendSRV = async () => {
-    console.log("send srv");
-    console.log(
-      watch("country"),
-      watch("person"),
-      watch("email"),
-      watch("phone"),
-      watch("document"),
-      watch("documentNumber")
-    );
-    // const resp = await fetch(`${API.war}request/register-user-war-srv`, {
-    const resp = await fetch(`${API.war}/request/register-user-war-srv`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    try {
+      console.log("send srv");
+      console.log(
+        watch("country"),
+        watch("person"),
+        watch("email"),
+        watch("phone"),
+        watch("document"),
+        watch("documentNumber")
+      );
+      const data = {
         country: watch("country"),
         person: watch("person"),
         email: watch("email"),
         phone: watch("phone"),
         document: watch("document"),
         document_number: watch("documentNumber"),
-      }),
-    });
-    console.log(resp);
+      };
+      console.log(data);
+      // const resp = await fetch(`${API.war}request/register-user-war-srv`, {
+      const resp = await fetch(`${API.war}request/register-user-war-srv`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      Swal.fire({
+        title: "¡Enviado!",
+        text: "Se ha enviado la solicitud de registro, revisa tu correo electrónico para más información.",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+      reset();
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -411,52 +419,72 @@ export const RequestView = () => {
                       height={150}
                       className="object-cover"
                     />
-                    <div className="flex flex-col text-white px-4 ">
-                      <p>
-                        ¿Tu mascota ya tiene un chip de identificación?
-                        ¡Entonces es el momento perfecto para registrarla en el
-                        World Animal Registry (W.A.R.) y asegurar su bienestar
-                        de por vida! En los países donde operamos, ofrecemos un
-                        servicio:
-                      </p>
+                    <div className="flex flex-col text-white px-4 mt-4">
+                      {hasChip ? (
+                        <div className="flex flex-col gap-4">
+                          <h2 className="text-2xl font-bold text-[#fff] text-center">
+                            ¿Tu mascota ya tiene un chip de identificación?
+                          </h2>
+                          <p className="text-justify font-normal">
+                            Estamos comprometidos en garantizar la seguridad y
+                            protección de tu compañero peludo. Si tu mascota ya
+                            tiene un chip, regístralo con nosotros. ¡Es fácil y
+                            rápido!
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col gap-4">
+                          <h2 className="text-2xl font-bold text-[#fff] text-center ">
+                            ¿Tu mascota no tiene un chip?
+                          </h2>
+                          <p className="text-justify font-normal">
+                            ¡No te preocupes! El registro en el W.A.R. es una de
+                            las mejores decisiones que puedes tomar para
+                            asegurar que tu mascota esté protegida y pueda ser
+                            identificada rápidamente. ¡Regístrala ahora!
+                          </p>
+                        </div>
+                      )}
+
                       {/* <h2 className="text-2xl font-bold">
                         {t("Complete Registration")}:
                       </h2> */}
                       <p>-----------------------------</p>
                       <ul className="font-semibold">
-                        {hasChip ? (
-                          <>
-                            <li className="list-disc">
-                              {t("Identification microchip")}
-                            </li>
-                            <li className="list-disc">
-                              {t("Registration in the W.A.R system")}
-                            </li>
-                            <li className="list-disc">
-                              {t("Adoption certification")}
-                            </li>
-                          </>
-                        ) : (
-                          <>
-                            <li className="list-disc">
-                              {t("Registration in the W.A.R system")}
-                            </li>
-                            <li className="list-disc">
-                              {t("Adoption certification")}
-                            </li>
-                            <li className="list-disc">
-                              {t("Veterinary consultation")}
-                              <br />
-                              <span className="text-sm">
-                                (
-                                {t(
-                                  "Main office headquarters Jesús María - Lima Peru"
-                                )}
-                                )
-                              </span>
-                            </li>
-                          </>
-                        )}
+                        {
+                          hasChip && (
+                            <>
+                              <li className="list-disc">
+                                {t("Identification microchip")}
+                              </li>
+                              <li className="list-disc">
+                                {t("Registration in the W.A.R system")}
+                              </li>
+                              <li className="list-disc">
+                                {t("Adoption certification")}
+                              </li>
+                            </>
+                          )
+                          // <>
+                          //   <li className="list-disc">
+                          //     {t("Registration in the W.A.R system")}
+                          //   </li>
+                          //   <li className="list-disc">
+                          //     {t("Adoption certification")}
+                          //   </li>
+                          //   <li className="list-disc">
+                          //     {t("Veterinary consultation")}
+                          //     <br />
+                          //     <span className="text-sm">
+                          //       (
+                          //       {t(
+                          //         "Main office headquarters Jesús María - Lima Peru"
+                          //       )}
+                          //       )
+                          //     </span>
+                          //   </li>
+                          // </>
+                        }
                         {/* <li className="list-disc">
                           {t("Veterinary consultation")}
                           <br />
@@ -466,7 +494,7 @@ export const RequestView = () => {
                           </span>
                         </li> */}
                       </ul>
-                      <p>-----------------------------</p>
+                      {/* <p>-----------------------------</p> */}
                     </div>
                   </>
                 )}
@@ -495,12 +523,12 @@ export const RequestView = () => {
               {/* end of left panel */}
               {
                 showQuestion && (
-                  <div className="flex flex-col w-full lg:w-2/3 border h-full py-10 md:py-24">
-                    <div className="flex flex-col items-center justify-center py-10 gap-3 w-full h-full  px-5 rounded-r-2xl">
+                  <div className="flex flex-col w-full lg:w-2/3 border h-full py-8 md:py-24">
+                    <div className="flex flex-col items-center justify-center py-8 gap-3 w-full h-full  px-5 rounded-r-2xl">
                       <button
                         type="button"
-                        className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-3 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-out hover:opacity-80 flex items-center justify-center w-full h-auto"
-                        onClick={handleChangeHasChip}
+                        className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-3 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-out hover:opacity-80 flex items-center justify-center w-full h-auto group"
+                        onClick={() => handleChangeHasChip("yes")}
                         value="yes"
                       >
                         <div className="flex gap-5 items-center">
@@ -518,7 +546,7 @@ export const RequestView = () => {
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 320 512"
-                            className="w-20 h-20 fill-current text-white font-normal"
+                            className="w-20 h-20 fill-current text-white font-normal flex md:hidden group-hover:flex"
                           >
                             <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
                           </svg>
@@ -528,8 +556,8 @@ export const RequestView = () => {
                     <div className="flex flex-col items-center gap-3 w-full h-full py-3 px-5 rounded-r-2xl">
                       <button
                         type="button"
-                        className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-3 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-ou hover:opacity-80 w-full"
-                        onClick={handleChangeHasChip}
+                        className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-3 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-ou hover:opacity-80 w-full group"
+                        onClick={() => handleChangeHasChip("no")}
                         value="no"
                       >
                         <div className="flex gap-5 items-center">
@@ -547,7 +575,7 @@ export const RequestView = () => {
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 320 512"
-                            className="w-24 h-24 fill-current text-white"
+                            className="w-24 h-24 fill-current text-white flex md:hidden group-hover:flex"
                           >
                             <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
                           </svg>
@@ -559,11 +587,11 @@ export const RequestView = () => {
               }
               {/* form */}
               {!showQuestion && (
-                <div className="flex flex-col w-full lg:w-2/3 border">
+                <div className="flex flex-col w-full lg:w-2/3 border relative h-full">
                   <form
                     ref={refForm}
                     onSubmit={handleSubmit(onSubmit)}
-                    className=" flex flex-col items-center gap-3 w-full h-full py-10 px-5 rounded-r-2xl"
+                    className=" flex flex-col items-center gap-3 w-full h-full py-8 px-5 rounded-r-2xl"
                   >
                     {hasChip && (
                       <div className="flex">
@@ -592,7 +620,7 @@ export const RequestView = () => {
                         step === 1
                           ? "opacity-100 z-10"
                           : "opacity-0 -z-20 absolute overflow-hidden w-0"
-                      }`}
+                      } ${!hasChip && "pt-7"}`}
                     >
                       <h2>{t("Identification")}</h2>
                       <ReactSelectComponent
@@ -623,7 +651,9 @@ export const RequestView = () => {
                       />
 
                       <ModalInputComponent
-                        name={`${t("Phone number")} (${watch("phone").length})`}
+                        name={`${t("Phone number")} (${
+                          watch("phone")?.length
+                        })`}
                         type="number"
                         property="phone"
                         values={register}
@@ -749,33 +779,86 @@ export const RequestView = () => {
                         </div>
                       }
                       {hasChip && (
-                        <button
-                          type="button"
-                          className="bg-[#29abe2] text-white rounded-xl h-10 font-bold disabled:opacity-50"
-                          onClick={handleNextStep}
-                          disabled={
-                            watch("email") === "" ||
-                            watch("phone") === "" ||
-                            watch("country") === "" ||
-                            watch("person") === "" ||
-                            watch("document") === "" ||
-                            watch("documentNumber") === "" ||
-                            watch("type") === "" ||
-                            watch("typeService") === ""
-                          }
-                        >
-                          {t("Continue")}
-                        </button>
-                      )}
-                      {
-                        !hasChip && (
+                        <>
+                          <button
+                            type="button"
+                            className="bg-[#29abe2] text-white rounded-xl h-10 font-bold disabled:opacity-50"
+                            onClick={handleNextStep}
+                            disabled={
+                              watch("email") === "" ||
+                              watch("phone") === "" ||
+                              watch("country") === "" ||
+                              watch("person") === "" ||
+                              watch("document") === "" ||
+                              watch("documentNumber") === "" ||
+                              watch("type") === "" ||
+                              watch("typeService") === ""
+                            }
+                          >
+                            {t("Continue")}
+                          </button>
                           <button
                             type="button"
                             className="bg-[#29abe2] text-white rounded-xl h-10 font-bold capitalize"
-                            onClick={handleSendSRV}
+                            onClick={() => {
+                              setShowQuestion(true);
+                              setHasChip(null);
+                            }}
                           >
-                            {t("send")}
+                            {t("back")}
                           </button>
+                          <h2 className="mt-auto text-sm flex gap-1 absolute right-50 bottom-0 text-center">
+                            Para cualquier consulta, unete a nuestro grupo de
+                            <a
+                              href="https://t.me/WorldAnimalRegistry"
+                              target="_blank"
+                              className="text-[#29abe2]"
+                              rel="noreferrer"
+                            >
+                              Telegram
+                            </a>
+                          </h2>
+                        </>
+                      )}
+                      {
+                        !hasChip && (
+                          <>
+                            <button
+                              type="button"
+                              className="bg-[#29abe2] text-white rounded-xl h-10 font-bold capitalize disabled:opacity-50"
+                              onClick={handleSendSRV}
+                              disabled={
+                                watch("country") === "" ||
+                                watch("email") === "" ||
+                                watch("phone") === "" ||
+                                watch("document") === "" ||
+                                watch("documentNumber") === ""
+                              }
+                            >
+                              {t("send")}
+                            </button>
+                            <button
+                              type="button"
+                              className="bg-[#29abe2] text-white rounded-xl h-10 font-bold capitalize"
+                              onClick={() => {
+                                setShowQuestion(true);
+                                setHasChip(null);
+                              }}
+                            >
+                              {t("back")}
+                            </button>
+                            <h2 className="mt-auto text-sm flex gap-1 absolute right-50 bottom-0 text-center">
+                              Para cualquier consulta, unete a nuestro grupo de
+                              <a
+                                href="https://t.me/WorldAnimalRegistry"
+                                target="_blank"
+                                className="text-[#29abe2]"
+                                rel="noreferrer"
+                              >
+                                Telegram
+                              </a>
+                            </h2>
+                          </>
                         ) // end of step 1 form
                       }
                     </div>
