@@ -338,7 +338,7 @@ export const RequestView = () => {
                 className="object-cover absolute top-0 left-0"
               />
             </div>
-            <div className="flex flex-col lg:flex-row justify-start items-start lg:pb-0 max-w-xl lg:max-w-3xl w-full rounded-2xl h-auto md:min-h-[700px] mb-10">
+            <div className="flex flex-col lg:flex-row justify-start items-start lg:pb-0 max-w-xl lg:max-w-3xl w-full rounded-2xl h-auto md:min-h-[700px] mb-10 border">
               {/* Left Panel */}
               <div className="flex flex-col items-center py-5 px-4 lg:w-1/3 bg-[#00a99d] h-auto md:min-h-[790px] rounded-l-2xl">
                 {showQuestion && (
@@ -523,7 +523,7 @@ export const RequestView = () => {
               {/* end of left panel */}
               {
                 showQuestion && (
-                  <div className="flex flex-col w-full lg:w-2/3 border h-full py-8 md:py-24">
+                  <div className="flex flex-col w-full lg:w-2/3 h-auto py-8 md:py-24 md:min-h-[790px]">
                     <div className="flex flex-col items-center justify-center py-8 gap-3 w-full h-full  px-5 rounded-r-2xl">
                       <button
                         type="button"
@@ -587,7 +587,7 @@ export const RequestView = () => {
               }
               {/* form */}
               {!showQuestion && (
-                <div className="flex flex-col w-full lg:w-2/3 border relative h-full">
+                <div className="flex flex-col w-full lg:w-2/3 relative h-full md:min-h-[790px]">
                   <form
                     ref={refForm}
                     onSubmit={handleSubmit(onSubmit)}
@@ -760,24 +760,6 @@ export const RequestView = () => {
                           // required
                         />
                       )}
-                      {
-                        <div className="relative -top-2 left-1">
-                          {watch("typeService") ===
-                            "REGISTRO COMPLETO S/.60" && (
-                            <span className="text-sm text-gray-600">
-                              (Incluye: Microchip de identificación, Registro en
-                              el sistema de W.A.R, Certificación de adopción,
-                              Consulta veterinaria)
-                            </span>
-                          )}
-                          {watch("typeService") === "SOLO REGISTRO S/.25" && (
-                            <span className="text-sm text-gray-600">
-                              (Incluye: Registro en el sistema de W.A.R,
-                              Certificación de adopción, Consulta veterinaria)
-                            </span>
-                          )}
-                        </div>
-                      }
                       {hasChip && (
                         <>
                           <button
