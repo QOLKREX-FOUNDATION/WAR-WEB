@@ -531,8 +531,11 @@ export const RequestView = () => {
               {/* end of left panel */}
               {
                 showQuestion && (
-                  <div className="flex flex-col w-full lg:w-2/3 h-auto py-8 md:py-24 md:min-h-[790px]">
-                    <div className="flex flex-col items-center justify-center py-8 gap-3 w-full h-full  px-5 rounded-r-2xl">
+                  <div className="flex flex-col w-full lg:w-2/3 h-auto py-8 md:py-20 md:min-h-[790px] relative">
+                    <h2 className="text-2xl font-bold text-[#000] text-center mb-8">
+                      Elige una opción para continuar con el registro de tu mascota
+                    </h2>
+                    <div className="flex flex-col items-center justify-center py-8 gap-3 w-full h-full px-5 rounded-r-2xl mb-5">
                       <button
                         type="button"
                         className="bg-[#29abe2] text-white rounded-xl font-bold px-4 mr-2 py-3 drop-shadow-lg hover:drop-shadow-xl transition duration-500 ease-in-out hover:opacity-80 flex items-center justify-center w-full h-auto group"
@@ -589,6 +592,17 @@ export const RequestView = () => {
                           </svg>
                         </div>
                       </button>
+                      <h2 className="mt-auto text-sm flex gap-1 absolute right-50 bottom-5 text-center">
+                            Para cualquier consulta, unete a nuestro grupo de
+                            <a
+                              href="https://t.me/WorldAnimalRegistry"
+                              target="_blank"
+                              className="text-[#29abe2]"
+                              rel="noreferrer"
+                            >
+                              Telegram
+                            </a>
+                          </h2>
                     </div>
                   </div>
                 ) // end of right panel
