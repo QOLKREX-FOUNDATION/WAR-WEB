@@ -42,6 +42,7 @@ export const RequestView = () => {
     label: "SOLO REGISTRO 8usd",
     value: "SOLO REGISTRO S/.25",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const { openModal, setOpenModal } = useModal();
   const { t } = useTranslation();
   const router = useRouter();
@@ -268,15 +269,16 @@ export const RequestView = () => {
   };
 
   const handleSendSRV = async () => {
-    const recaptchaValue = recaptchaRef.current.getValue();
-    console.log("verify", recaptchaValue);
-    if (!recaptchaValue) {
-      toast.error("Por favor complete el captcha", {
-        theme: "colored",
-      });
-      return;
-    }
     try {
+      setIsLoading(true);
+      const recaptchaValue = recaptchaRef.current.getValue();
+      console.log("verify", recaptchaValue);
+      if (!recaptchaValue) {
+        toast.error("Por favor complete el captcha", {
+          theme: "colored",
+        });
+        return;
+      }
       console.log("send srv");
       console.log(
         watch("country"),
@@ -309,10 +311,12 @@ export const RequestView = () => {
         icon: "success",
         confirmButtonText: "OK",
       });
+      setIsLoading(false);
       reset();
       console.log(resp);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
@@ -533,7 +537,8 @@ export const RequestView = () => {
                 showQuestion && (
                   <div className="flex flex-col w-full lg:w-2/3 h-auto py-8 md:py-20 md:min-h-[790px] relative">
                     <h2 className="text-2xl font-bold text-[#000] text-center mb-8">
-                      Elige una opción para continuar con el registro de tu mascota
+                      Elige una opción para continuar con el registro de tu
+                      mascota
                     </h2>
                     <div className="flex flex-col items-center justify-center py-8 gap-3 w-full h-full px-5 rounded-r-2xl mb-5">
                       <button
@@ -593,16 +598,16 @@ export const RequestView = () => {
                         </div>
                       </button>
                       <h2 className="mt-auto text-sm flex gap-1 absolute right-50 bottom-5 text-center">
-                            Para cualquier consulta, unete a nuestro grupo de
-                            <a
-                              href="https://t.me/WorldAnimalRegistry"
-                              target="_blank"
-                              className="text-[#29abe2]"
-                              rel="noreferrer"
-                            >
-                              Telegram
-                            </a>
-                          </h2>
+                        Para cualquier consulta, unete a nuestro grupo de
+                        <a
+                          href="https://t.me/WorldAnimalRegistry"
+                          target="_blank"
+                          className="text-[#29abe2]"
+                          rel="noreferrer"
+                        >
+                          Telegram
+                        </a>
+                      </h2>
                     </div>
                   </div>
                 ) // end of right panel
@@ -844,7 +849,8 @@ export const RequestView = () => {
                                 watch("email") === "" ||
                                 watch("phone") === "" ||
                                 watch("document") === "" ||
-                                watch("documentNumber") === ""
+                                watch("documentNumber") === "" ||
+                                isLoading
                               }
                             >
                               {t("send")}
