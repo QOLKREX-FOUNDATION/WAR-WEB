@@ -28,6 +28,7 @@ const countriesAcepeted = [
   { label: "PERU", value: "PE" },
   { label: "MEXICO", value: "MX" },
   { label: "HONDURAS", value: "HN" },
+  { label: "ESPANA", value: "ES" },
 ];
 const countriesAcepetedWithoutChip = [
   { label: "PERU", value: "PE" },
