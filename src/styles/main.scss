@@ -10,6 +10,7 @@
   width: 100%;
   height: 100%;
 }
+
 .swiper-slide {
   text-align: center;
   font-size: 18px;
@@ -26,6 +27,7 @@
   -webkit-align-items: center;
   align-items: center;
 }
+
 .swiper-slide img {
   display: block;
   width: 100%;
@@ -41,12 +43,14 @@
   color: transparent !important;
   width: 3rem !important;
   height: 3rem !important;
+
   // filter: hue-rotate(180deg);
   @include breakpoints.medium {
     width: 2rem !important;
     height: 2rem !important;
   }
 }
+
 .swiper-button-prev {
   background-image: url("/img/slides/arrow_2.png") !important;
   background-repeat: no-repeat;
@@ -56,6 +60,7 @@
   transform: rotate(180deg);
   width: 3rem !important;
   height: 3rem !important;
+
   // filter: hue-rotate(180deg);
   // position: absolute;
   // left: -2rem;
@@ -71,7 +76,7 @@
 
 // dropdown
 
-.dropdown__link:hover + .dropdown__content,
+.dropdown__link:hover+.dropdown__content,
 .dropdown__content:hover {
   display: block;
 }
@@ -97,6 +102,7 @@
   position: relative;
   z-index: 0;
 }
+
 .bg-gradient-2 {
   background: linear-gradient(90deg, #ffc194 0%, #bfedff 80%, #bb5bff 100%);
   background-size: cover;
@@ -107,6 +113,7 @@
   position: relative;
   z-index: 0;
 }
+
 .bg-gradient-3 {
   background: linear-gradient(90deg, #eeff97 0%, #bdfef1 80%, #f7b36e 100%);
   background-size: cover;
@@ -164,4 +171,34 @@
 #payment-form {
   width: 100%;
   padding: 0 20px 20px;
+}
+
+.custom-h1 {
+  padding: 3rem 2rem 4rem 2rem;
+  font-size: 28px;
+  font-family: "Inter-SemiBold";
+  text-align: center;
+  position: relative;
+  color: #45b7e1;
+}
+
+.custom-h1::before,
+.custom-h1::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 50px;
+  background: url("/img/mission/paws.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.custom-h1::before {
+  margin-left: -100px;
+}
+
+.custom-h1::after {
+  margin-left: 40px;
+  transform: rotate(270deg);
 }

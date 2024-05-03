@@ -115,16 +115,20 @@ export const CompaignsView = () => {
                                 </SwiperSlide>
                                 <SwiperSlide>
                                     <div className='w-80 h-full bg-[#cfefed] px-5 py-3 rounded-2xl'>
-                                        <a
+                                        <Link
+                                            href="/compaigns/mascotassinhogar"
+                                            // target='_blank'
+                                            // rel='noreferrer noopener'
+                                            // to="vicuid"
                                             className='hover:cursor-pointer'
-                                            onClick={() => setOpenModal(true)}>
+                                        >
                                             <Image
                                                 src="/img/donation/image_03.png"
                                                 width={333}
                                                 height={230}
                                                 alt="image"
                                             />
-                                        </a>
+                                        </Link>
                                         <div className='flex flex-col gap-3 py-2'>
                                             <h3 className='font-semibold text-[#0ea5e9]'>Jaguar</h3>
                                             <p className="max-h-72 overflow-hidden">
