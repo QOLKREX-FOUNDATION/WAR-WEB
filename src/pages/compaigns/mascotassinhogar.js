@@ -1,7 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { API } from "../../config";
 import { MainLayoutNew } from "../../layouts/MainLayoutNew";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
+import Swal from "sweetalert2";
 
 export default function PetsWithoutHome() {
   const [amountToDonate, setAmountToDonate] = useState(1);
@@ -13,6 +16,67 @@ export default function PetsWithoutHome() {
     email: "",
     phone: "",
   });
+
+  const searchParams = useSearchParams();
+  // console.log(searchParams);
+  // console.log(searchParams.size);
+  const router = useRouter();
+
+  const status = searchParams.get("status");
+
+  // console.log(status);
+
+  useEffect(() => {
+    const newDonator = async (donator) => {
+      const resp = await fetch(
+        `${API.war}payment/new-donator`,
+        // `http://localhost:5000/api/payment/new-donator`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(donator),
+        }
+      );
+      const data = await resp.json();
+      // console.log(data);
+    };
+    if (status === "success") {
+      const name = searchParams.get("name");
+      const lastName = searchParams.get("lastName");
+      const email = searchParams.get("email");
+      const phone = searchParams.get("phone");
+      const amount = searchParams.get("amount");
+      const documentType = searchParams.get("documentType");
+      const documentNumber = searchParams.get("documentNumber");
+      const donator = {
+        name,
+        lastName,
+        documentType,
+        documentNumber,
+        email,
+        phone,
+        amount,
+      };
+      // console.log({donator})
+      newDonator(donator)
+        .then(() => console.log("Donator created"))
+        .catch((err) => console.log(err));
+      router.replace("/compaigns/mascotassinhogar", undefined, {
+        shallow: false,
+      });
+      Swal.fire({
+        title: "¡Gracias por tu contribución!",
+        text: "Pronto te premiaremos por tus contribuciones",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+    }
+
+    
+  }, [status, router]);
+
   return (
     <MainLayoutNew
       title="¡Ayúdanos a dar identidad y esperanza a las mascotas sin hogar!"
@@ -238,13 +302,12 @@ export default function PetsWithoutHome() {
                     },
                     body: JSON.stringify({
                       amount: amountToDonate * 10,
+                      lastName: donatorInfo.lastname,
                       ...donatorInfo,
                     }),
                   }
                 );
                 const data = await resp.json();
-                console.log(data);
-                console.log(data.id);
                 // setPreferenceId(data.id)
                 // Open data.initpoint in a new tab
                 if (data.id) {
