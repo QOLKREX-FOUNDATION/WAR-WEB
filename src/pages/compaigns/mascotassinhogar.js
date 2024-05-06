@@ -24,6 +24,25 @@ export default function PetsWithoutHome() {
 
   const status = searchParams.get("status");
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setDonatorInfo((prevDonatorInfo) => ({
+      ...prevDonatorInfo,
+      [name]: value,
+    }));
+  };
+
+  const validateInputs = () => {
+    const { name, lastname, documentNumber, email, phone } = donatorInfo;
+    return name && lastname && documentNumber && email && phone;
+  };
+
+  useEffect(() => {
+    setIsButtonDisabled(!validateInputs());
+  }, [donatorInfo]);
+
   // console.log(status);
 
   useEffect(() => {
@@ -150,9 +169,8 @@ export default function PetsWithoutHome() {
                     placeholder="Nombre"
                     className="border-2 border-gray-300 rounded-md px-2 py-1"
                     value={donatorInfo.name}
-                    onChange={(e) =>
-                      setDonatorInfo({ ...donatorInfo, name: e.target.value })
-                    }
+                    name="name"
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="flex flex-col md:flex-row items-center gap-2">
@@ -163,12 +181,8 @@ export default function PetsWithoutHome() {
                     placeholder="Apellido"
                     className="border-2 border-gray-300 rounded-md px-2 py-1"
                     value={donatorInfo.lastname}
-                    onChange={(e) =>
-                      setDonatorInfo({
-                        ...donatorInfo,
-                        lastname: e.target.value,
-                      })
-                    }
+                    name="lastname"
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
@@ -176,16 +190,11 @@ export default function PetsWithoutHome() {
                 <div className="flex flex-col md:flex-row items-center gap-2">
                   <label htmlFor="donateDocumentType">Tipo de documento</label>
                   <select
-                    name="donateDocumentType"
                     id="donateDocumentType"
                     className="border-2 border-gray-300 rounded-md px-2 py-1"
                     value={donatorInfo.documentType}
-                    onChange={(e) =>
-                      setDonatorInfo({
-                        ...donatorInfo,
-                        documentType: e.target.value,
-                      })
-                    }
+                    name="documentType"
+                    onChange={handleInputChange}
                   >
                     <option value="dni">DNI</option>
                     <option value="passport">Pasaporte</option>
@@ -200,12 +209,8 @@ export default function PetsWithoutHome() {
                     placeholder="Número de documento"
                     className="border-2 border-gray-300 rounded-md px-2 py-1"
                     value={donatorInfo.documentNumber}
-                    onChange={(e) =>
-                      setDonatorInfo({
-                        ...donatorInfo,
-                        documentNumber: e.target.value,
-                      })
-                    }
+                    name="documentNumber"
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
@@ -218,9 +223,8 @@ export default function PetsWithoutHome() {
                     placeholder="Correo Electrónico"
                     className="border-2 border-gray-300 rounded-md px-2 py-1"
                     value={donatorInfo.email}
-                    onChange={(e) =>
-                      setDonatorInfo({ ...donatorInfo, email: e.target.value })
-                    }
+                    name="email"
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="flex flex-col md:flex-row items-center gap-2">
@@ -231,9 +235,8 @@ export default function PetsWithoutHome() {
                     placeholder="Teléfono"
                     className="border-2 border-gray-300 rounded-md px-2 py-1"
                     value={donatorInfo.phone}
-                    onChange={(e) =>
-                      setDonatorInfo({ ...donatorInfo, phone: e.target.value })
-                    }
+                    name="phone"
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
@@ -289,9 +292,8 @@ export default function PetsWithoutHome() {
             /> */}
             <button
               className="bg-blue-600 text-white px-5 py-2 rounded mt-5 disabled:opacity-50 shadow-lg"
-              disabled={amountToDonate === 0}
+              disabled={amountToDonate === 0 || isButtonDisabled}
               onClick={async () => {
-                console.log({ donatorInfo });
                 const resp = await fetch(
                   `${API.war}payment/war-create-donation-order`,
                   // `http://localhost:5000/api/payment/war-create-donation-order`,
@@ -315,6 +317,7 @@ export default function PetsWithoutHome() {
                   window.open(data.init_point, "_blank");
                 }
               }}
+
             >
               Contribuya a nuestra misión
             </button>
