@@ -301,6 +301,8 @@ export default function PetsWithoutHome() {
                     body: JSON.stringify({
                       amount: amountToDonate * 10,
                       lastName: donatorInfo.lastname,
+                      campaign: 1,
+                      campaignName: "mascotassinhogar",
                       ...donatorInfo,
                     }),
                   }
