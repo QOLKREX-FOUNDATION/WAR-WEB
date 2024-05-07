@@ -17,6 +17,7 @@ export default function PetsWithoutHome() {
     email: "",
     phone: "",
   });
+  const [totalDonation, setTotalDonation] = useState(0);
 
   const searchParams = useSearchParams();
   // console.log(searchParams);
@@ -46,7 +47,23 @@ export default function PetsWithoutHome() {
     setIsButtonDisabled(!validateInputs());
   }, [donatorInfo]);
 
-  // console.log(status);
+  useEffect(() => {
+    const getTotalAmount = async () => {
+      const resp = await fetch(
+        `${API.war}campaign/total/1`,
+        // `http://localhost:5000/api/campaign/total/0`,
+        {
+          method: "GET",
+        }
+      );
+      const data = await resp.json();
+      setTotalDonation(data.totalAmount);
+      console.log(data.totalAmount);
+    };
+    getTotalAmount()
+      .then(() => console.log("Total amount fetched"))
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     const newDonator = async (donator) => {
@@ -80,7 +97,7 @@ export default function PetsWithoutHome() {
         email,
         phone,
         amount,
-        campaign: 1,
+        campaign: 0,
       };
       // console.log({donator})
       newDonator(donator)
@@ -159,7 +176,9 @@ export default function PetsWithoutHome() {
             <div className="flex flex-col items-center gap-3 w-full ">
               <div className="flex flex-col gap-3 md:flex-row w-full md:max-w-[90%] lg:max-w-[75%] justify-between">
                 <div className="flex flex-col md:flex-row items-center gap-2">
-                  <label htmlFor="donateName" className="capitalize">{t("name")}</label>
+                  <label htmlFor="donateName" className="capitalize">
+                    {t("name")}
+                  </label>
                   <input
                     type="text"
                     id="donateName"
@@ -171,7 +190,9 @@ export default function PetsWithoutHome() {
                   />
                 </div>
                 <div className="flex flex-col md:flex-row items-center gap-2">
-                  <label htmlFor="donateLastname" className="capitalize">{t("surname")}</label>
+                  <label htmlFor="donateLastname" className="capitalize">
+                    {t("surname")}
+                  </label>
                   <input
                     type="text"
                     id="donateLastname"
@@ -185,7 +206,9 @@ export default function PetsWithoutHome() {
               </div>
               <div className="flex flex-col gap-3 md:flex-row w-full md:max-w-[90%] lg:max-w-[75%] justify-between">
                 <div className="flex flex-col md:flex-row items-center gap-2">
-                  <label htmlFor="donateDocumentType">{t("Type Document")}</label>
+                  <label htmlFor="donateDocumentType">
+                    {t("Type Document")}
+                  </label>
                   <select
                     id="donateDocumentType"
                     className="border-2 border-gray-300 rounded-md px-2 py-1"
@@ -199,7 +222,9 @@ export default function PetsWithoutHome() {
                   </select>
                 </div>
                 <div className="flex flex-col md:flex-row items-center gap-2">
-                  <label htmlFor="donateDocumentNumber">{t("Document number")}</label>
+                  <label htmlFor="donateDocumentNumber">
+                    {t("Document number")}
+                  </label>
                   <input
                     type="text"
                     id="donateDocumentNumber"
@@ -281,7 +306,9 @@ export default function PetsWithoutHome() {
                   +
                 </button>
               </div>
-              <h2>{t("Total to Contribute")}: S/{amountToDonate * 10}</h2>
+              <h2>
+                {t("Total to Contribute")}: S/{amountToDonate * 10}
+              </h2>
             </div>
             {/* <FormMP
               info={{ amount: amountToDonate * 10 }}
@@ -302,7 +329,7 @@ export default function PetsWithoutHome() {
                     body: JSON.stringify({
                       amount: amountToDonate * 10,
                       lastName: donatorInfo.lastname,
-                      campaign: 1,
+                      campaign: 0,
                       campaignName: "mascotassinhogar",
                       ...donatorInfo,
                     }),
@@ -319,6 +346,10 @@ export default function PetsWithoutHome() {
             >
               {t("Contribute to our mission")}
             </button>
+            <p className="text-center mt-1 text-sm">
+              {totalDonation} {t("Paws Contribution")} = S/{totalDonation * 10}
+            </p>
+            {/* goal */}
             <hr className="w-full border-1 border-gray-300 mt-3" />
             <p className="text-center mt-1">
               {t("Join our group of")}
