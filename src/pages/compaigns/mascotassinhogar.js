@@ -80,6 +80,7 @@ export default function PetsWithoutHome() {
         email,
         phone,
         amount,
+        campaign: 1,
       };
       // console.log({donator})
       newDonator(donator)
