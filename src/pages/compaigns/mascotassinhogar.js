@@ -97,7 +97,7 @@ export default function PetsWithoutHome() {
         email,
         phone,
         amount,
-        campaign: 0,
+        campaign: 1,
       };
       // console.log({donator})
       newDonator(donator)
@@ -329,7 +329,7 @@ export default function PetsWithoutHome() {
                     body: JSON.stringify({
                       amount: amountToDonate * 10,
                       lastName: donatorInfo.lastname,
-                      campaign: 0,
+                      campaign: 1,
                       campaignName: "mascotassinhogar",
                       ...donatorInfo,
                     }),
