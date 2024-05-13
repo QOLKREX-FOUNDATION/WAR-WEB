@@ -133,24 +133,25 @@ export const CompaignsView = () => {
                 <SwiperSlide>
                   <div className="w-80 h-full bg-[#cfefed] px-5 py-3 rounded-2xl">
                     <Link
-                      href="/compaigns/"
+                      href="/compaigns/guardianessilvestres"
                       // target='_blank'
                       // rel='noreferrer noopener'
                       // to="vicuid"
                       className="hover:cursor-pointer"
                     >
                       <Image
-                        src="/img/donation/image_03.png"
+                        src="/img/donation/silvestres-banner.jpg"
                         width={333}
                         height={230}
                         alt="image"
+                        style={{height: "193px", objectFit: "cover"}}
                       />
                     </Link>
                     <div className="flex flex-col gap-3 py-2">
-                      <h3 className="font-semibold text-[#0ea5e9]">Jaguar</h3>
+                      <h3 className="font-semibold text-[#0ea5e9]">{t("Wilds Animals Campaign")}</h3>
                       <p className="max-h-72 overflow-hidden">
                         {t(
-                          "The South American Jaguar Donation Campaign is an initiative that aims to raise funds to support the conservation and well-being of this endangered species. The South American jaguar is an emblematic animal of South America and is considered a symbol of strength and power. However, it has been endangered due to habitat degradation and poaching. The donation campaign can include various activities, such as the sale of commemorative products, fundraising events and awareness campaigns through social networks and other means of communication. All proceeds from this campaign go to projects for the conservation and protection of the South American jaguar and its habitat."
+                          "Join our mission to build a protective sanctuary in Aguaytia- Ucayali, Peruvian jungle, where rescued wildlife can heal and thrive. Your contribution will allow us to create a safe and loving refuge, providing medical care and nurturing to these vulnerable animals until they are ready to return to their natural habitat. Together, we can make a difference by protecting our furry friends and preserving the beauty of our natural environment"
                         )}
                       </p>
                       <a
