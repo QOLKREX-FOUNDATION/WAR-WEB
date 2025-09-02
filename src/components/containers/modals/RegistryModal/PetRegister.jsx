@@ -14,70 +14,70 @@ import { ReactSelectComponent } from "../../../molecules/ReactSelectComponent/Re
 import { ModalFile } from "../../../atoms/inputs/ModalFile/ModalFile";
 
 export const PetRegister = ({
-	petValues,
-	watchPet,
-	setPet,
-	errorsPet,
-	check,
-	setCheck,
+  petValues,
+  watchPet,
+  setPet,
+  errorsPet,
+  check,
+  setCheck,
 }) => {
-	const { web3 } = useContext(Web3Context);
-	const [haveChip, setHaveChip] = useState(false);
+  const { web3 } = useContext(Web3Context);
+  const [haveChip, setHaveChip] = useState(false);
 
-	const { species, races } = useSpecie(watchPet("type"), petValues);
-	const { countries } = useCountry();
-	const { colours } = useColours();
+  const { species, races } = useSpecie(watchPet("type"), petValues);
+  const { countries } = useCountry();
+  const { colours } = useColours();
 
-	// const [isFiat, setIsFiat] = useState(true);
-	// const [isCrypto, setIsCrypto] = useState(false);
-	// const [priceU, setPriceU] = useState("0");
-	// const [priceF, setPriceF] = useState(0);
+  // const [isFiat, setIsFiat] = useState(true);
+  // const [isCrypto, setIsCrypto] = useState(false);
+  // const [priceU, setPriceU] = useState("0");
+  // const [priceF, setPriceF] = useState(0);
 
-	// const onSetFiat = () => {
-	// 	setIsFiat(true);
-	// 	setIsCrypto(false);
-	// };
-	// const onSetCrypto = () => {
-	// 	setIsFiat(false);
-	// 	setIsCrypto(true);
-	// };
+  // const onSetFiat = () => {
+  // 	setIsFiat(true);
+  // 	setIsCrypto(false);
+  // };
+  // const onSetCrypto = () => {
+  // 	setIsFiat(false);
+  // 	setIsCrypto(true);
+  // };
 
-	// const publicAddress = "0x4415B2Bfc4445b33C17c1A0b0D10cC18e9F928D0";
-	// const contractCopy = () => {
-	// 	navigator.clipboard.writeText(publicAddress);
-	// };
+  // const publicAddress = "0x4415B2Bfc4445b33C17c1A0b0D10cC18e9F928D0";
+  // const contractCopy = () => {
+  // 	navigator.clipboard.writeText(publicAddress);
+  // };
 
-	// useEffect(() => {
-	// 	isCrypto && setPet("payable", "");
-	// }, [isCrypto]);
+  // useEffect(() => {
+  // 	isCrypto && setPet("payable", "");
+  // }, [isCrypto]);
 
-	// useEffect(() => {
-	// 	isFiat && setPet("tx", "");
-	// }, [isFiat]);
+  // useEffect(() => {
+  // 	isFiat && setPet("tx", "");
+  // }, [isFiat]);
 
-	// useEffect(() => {
-	// 	setPriceU(haveChip ? "16" : "8");
-	// }, [haveChip]);
+  // useEffect(() => {
+  // 	setPriceU(haveChip ? "16" : "8");
+  // }, [haveChip]);
 
-	// useEffect(() => {
-	// 	getAmountsIn(web3.networkWar, "FIRU", "USDC", priceU)
-	// 		.then((resolve) => {
-	// 			if (resolve?.value[0] > 0) {
-	// 				setPriceF(amountBigReverse(resolve?.value[0], 8));
-	// 			}
-	// 		})
-	// 		.catch((e) => console.log(e));
-	// }, [priceU]);
+  // useEffect(() => {
+  // 	getAmountsIn(web3.networkWar, "FIRU", "USDC", priceU)
+  // 		.then((resolve) => {
+  // 			if (resolve?.value[0] > 0) {
+  // 				setPriceF(amountBigReverse(resolve?.value[0], 8));
+  // 			}
+  // 		})
+  // 		.catch((e) => console.log(e));
+  // }, [priceU]);
 
-	useEffect(() => {
-		if (watchPet("race") === "HALF BLOOD") {
-			setPet("pedigree", "");
-		}
-	}, [watchPet("race")]);
+  useEffect(() => {
+    if (watchPet("race") === "HALF BLOOD") {
+      setPet("pedigree", "");
+    }
+  }, [watchPet("race")]);
 
-	return (
-		<>
-			{/* <div className={classes.modal__contentMainFormPayment}>
+  return (
+    <>
+      {/* <div className={classes.modal__contentMainFormPayment}>
 				<h3>Modalidades de pago</h3>
 				<div>
 					<div
@@ -180,237 +180,237 @@ export const PetRegister = ({
 				</div>
 			</div> */}
 
-			<div className={`${ classes.modal__contentMainFormReveal }`}>
-				<div>
-					<ModalCheckbox
-						onClick={() => setHaveChip(!haveChip)}
-						show={haveChip}
-						label="¿La mascota tiene chip de identificación?"
-					/>
-				</div>
-				{haveChip && (
-					<div>
-						<ModalChipInputComponent
-							name="código de microchip"
-							property="chip"
-							type="number"
-							values={petValues}
-							setPet={setPet}
-							error={errorsPet}
-							required={haveChip}
-							watchPet={watchPet}
-							update={false}
-						/>
-					</div>
-				)}
-			</div>
-			<div
-				className={`${ classes.modal__contentMainFormSection } ${ classes.modal__contentMainFormChip }`}
-			>
-				<h3>identificación</h3>
-				<div>
-					<ModalInputComponent
-						name="nombre"
-						property="name"
-						values={petValues}
-						error={errorsPet}
-						required
-					/>
-					{/* <ReactSelectComponent
-						name="País"
-						property="country"
-						options={countries}
-						values={petValues}
-						watch={watchPet}
-						setValue={setPet}
-						error={errorsPet}
-						required
-					/> */}
+      <div className={`${classes.modal__contentMainFormReveal}`}>
+        <div>
+          <ModalCheckbox
+            onClick={() => setHaveChip(!haveChip)}
+            show={haveChip}
+            label="¿La mascota tiene chip de identificación?"
+          />
+        </div>
+        {haveChip && (
+          <div>
+            <ModalChipInputComponent
+              name="código de microchip"
+              property="chip"
+              type="number"
+              values={petValues}
+              setPet={setPet}
+              error={errorsPet}
+              required={haveChip}
+              watchPet={watchPet}
+              update={false}
+            />
+          </div>
+        )}
+      </div>
+      <div
+        className={`${classes.modal__contentMainFormSection} ${classes.modal__contentMainFormChip}`}
+      >
+        <h3>identificación</h3>
+        <div>
+          <ModalInputComponent
+            name="nombre"
+            property="name"
+            values={petValues}
+            error={errorsPet}
+            required
+          />
+          <ReactSelectComponent
+            name="País"
+            property="country"
+            options={countries}
+            values={petValues}
+            watch={watchPet}
+            setValue={setPet}
+            error={errorsPet}
+            required
+          />
 
-					<ReactSelectComponent
-						name="Animal"
-						property="type"
-						options={species}
-						values={petValues}
-						watch={watchPet}
-						setValue={setPet}
-						error={errorsPet}
-						required
-					/>
-					<ReactSelectComponent
-						name="Sexo"
-						property="gender"
-						options={[
-							{ label: "MACHO", value: "MALE" },
-							{ label: "HEMBRA", value: "FEMALE" },
-						]}
-						values={petValues}
-						watch={watchPet}
-						setValue={setPet}
-						error={errorsPet}
-						required
-					/>
-					<ReactSelectComponent
-						name="raza"
-						property="race"
-						options={races}
-						values={petValues}
-						watch={watchPet}
-						setValue={setPet}
-						error={errorsPet}
-						required
-					/>
+          <ReactSelectComponent
+            name="Animal"
+            property="type"
+            options={species}
+            values={petValues}
+            watch={watchPet}
+            setValue={setPet}
+            error={errorsPet}
+            required
+          />
+          <ReactSelectComponent
+            name="Sexo"
+            property="gender"
+            options={[
+              { label: "MACHO", value: "MALE" },
+              { label: "HEMBRA", value: "FEMALE" },
+            ]}
+            values={petValues}
+            watch={watchPet}
+            setValue={setPet}
+            error={errorsPet}
+            required
+          />
+          <ReactSelectComponent
+            name="raza"
+            property="race"
+            options={races}
+            values={petValues}
+            watch={watchPet}
+            setValue={setPet}
+            error={errorsPet}
+            required
+          />
 
-					<ReactSelectComponent
-						name="color (max. 3)"
-						property="colour"
-						options={colours}
-						value={colours.filter((color) =>
-							watchPet("colour").split(",").includes(color.value)
-						)}
-						onChange={(target) => {
-							if (target.length < 4) {
-								const arr = target.map((t) => t.value);
-								setPet("colour", arr.join(","));
-							}
-						}}
-						values={petValues}
-						watch={watchPet}
-						setValue={setPet}
-						error={errorsPet}
-						isMulti
-						required
-					/>
-					<ModalInputComponent
-						name="fecha de nacimiento"
-						property="date"
-						type="date"
-						values={petValues}
-						error={errorsPet}
-						required
-					/>
+          <ReactSelectComponent
+            name="color (max. 3)"
+            property="colour"
+            options={colours}
+            value={colours.filter((color) =>
+              watchPet("colour").split(",").includes(color.value)
+            )}
+            onChange={(target) => {
+              if (target.length < 4) {
+                const arr = target.map((t) => t.value);
+                setPet("colour", arr.join(","));
+              }
+            }}
+            values={petValues}
+            watch={watchPet}
+            setValue={setPet}
+            error={errorsPet}
+            isMulti
+            required
+          />
+          <ModalInputComponent
+            name="fecha de nacimiento"
+            property="date"
+            type="date"
+            values={petValues}
+            error={errorsPet}
+            required
+          />
 
-					<ModalInputComponent
-						name="fecha de adopción"
-						type="date"
-						property="dateAdoption"
-						values={petValues}
-						error={errorsPet}
-						required
-					/>
+          <ModalInputComponent
+            name="fecha de adopción"
+            type="date"
+            property="dateAdoption"
+            values={petValues}
+            error={errorsPet}
+            required
+          />
 
-					<ReactSelectComponent
-						name="esterilizado"
-						property="sterilized"
-						options={optionsSterilized}
-						values={petValues}
-						watch={watchPet}
-						setValue={setPet}
-						error={errorsPet}
-						required
-					/>
-				</div>
-			</div>
+          <ReactSelectComponent
+            name="esterilizado"
+            property="sterilized"
+            options={optionsSterilized}
+            values={petValues}
+            watch={watchPet}
+            setValue={setPet}
+            error={errorsPet}
+            required
+          />
+        </div>
+      </div>
 
-			<div className={classes.modal__contentMainFormSection}>
-				<h3>genealogía (opcional)</h3>
-				<div>
-					<ModalChipInputComponent
-						name="Microchip del padre"
-						property="chipFather"
-						type="number"
-						values={petValues}
-						setPet={setPet}
-						error={errorsPet}
-						watchPet={watchPet}
-						update={true}
-					/>
+      <div className={classes.modal__contentMainFormSection}>
+        <h3>genealogía (opcional)</h3>
+        <div>
+          <ModalChipInputComponent
+            name="Microchip del padre"
+            property="chipFather"
+            type="number"
+            values={petValues}
+            setPet={setPet}
+            error={errorsPet}
+            watchPet={watchPet}
+            update={true}
+          />
 
-					<ModalChipInputComponent
-						name="Microchip de la madre"
-						property="chipMother"
-						type="number"
-						values={petValues}
-						setPet={setPet}
-						error={errorsPet}
-						watchPet={watchPet}
-						update={true}
-					/>
-				</div>
-			</div>
+          <ModalChipInputComponent
+            name="Microchip de la madre"
+            property="chipMother"
+            type="number"
+            values={petValues}
+            setPet={setPet}
+            error={errorsPet}
+            watchPet={watchPet}
+            update={true}
+          />
+        </div>
+      </div>
 
-			<div className={`${ classes.modal__contentMainFormCapture }`}>
-				<h3>imagen de mascota</h3>
-				<div>
-					<div>
-						<p>Recomendado: 350px x 467px</p>
-						<ModalFile
-							name="Foto de la Mascota"
-							values={petValues}
-							watch={watchPet}
-							property="image"
-							error={errorsPet}
-							required
-						/>
-					</div>
-					{watchPet("race") !== "HALF BLOOD" && watchPet("race") && (
-						<div>
-							<ModalFile
-								name="Comprobante Pedigree"
-								values={petValues}
-								watch={watchPet}
-								property="pedigree"
-								error={errorsPet}
-							/>
-						</div>
-					)}
-				</div>
-			</div>
+      <div className={`${classes.modal__contentMainFormCapture}`}>
+        <h3>imagen de mascota</h3>
+        <div>
+          <div>
+            <p>Recomendado: 350px x 467px</p>
+            <ModalFile
+              name="Foto de la Mascota"
+              values={petValues}
+              watch={watchPet}
+              property="image"
+              error={errorsPet}
+              required
+            />
+          </div>
+          {watchPet("race") !== "HALF BLOOD" && watchPet("race") && (
+            <div>
+              <ModalFile
+                name="Comprobante Pedigree"
+                values={petValues}
+                watch={watchPet}
+                property="pedigree"
+                error={errorsPet}
+              />
+            </div>
+          )}
+        </div>
+      </div>
 
-			<div>
-				<h4>Declaro bajo juramento que:</h4>
-				<br />
-				<div
-					className={`${ classes.modal__contentMainFormReveal }`}
-					style={{ gridTemplateColumns: "repeat(1, 1fr)" }}
-				>
-					<div>
-						<ModalCheckbox
-							onClick={() => setCheck((v) => ({ ...v, pet: !v.pet }))}
-							show={check.pet}
-							label="Soy Propietario de la mascota a registrar"
-						/>
-					</div>
-				</div>
-				<div
-					className={`${ classes.modal__contentMainFormReveal }`}
-					style={{ gridTemplateColumns: "repeat(1, 1fr)" }}
-				>
-					<div>
-						<ModalCheckbox
-							onClick={() => setCheck((v) => ({ ...v, chip: !v.chip }))}
-							show={check.chip}
-							label={
-								haveChip
-									? "Mi mascota a registrar cuenta con microchip o identificación interna"
-									: "Mi mascota a registrar no cuenta con microchip o identificación interna"
-							}
-						/>
-					</div>
-				</div>
-				<div
-					className={`${ classes.modal__contentMainFormReveal }`}
-					style={{ gridTemplateColumns: "repeat(1, 1fr)" }}
-				>
-					<div>
-						<ModalCheckbox
-							onClick={() => setCheck((v) => ({ ...v, search: !v.search }))}
-							show={check.search}
-							label="Acepto compartir mi información en las búsquedas de la plataforma"
-						/>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+      <div>
+        <h4>Declaro bajo juramento que:</h4>
+        <br />
+        <div
+          className={`${classes.modal__contentMainFormReveal}`}
+          style={{ gridTemplateColumns: "repeat(1, 1fr)" }}
+        >
+          <div>
+            <ModalCheckbox
+              onClick={() => setCheck((v) => ({ ...v, pet: !v.pet }))}
+              show={check.pet}
+              label="Soy Propietario de la mascota a registrar"
+            />
+          </div>
+        </div>
+        <div
+          className={`${classes.modal__contentMainFormReveal}`}
+          style={{ gridTemplateColumns: "repeat(1, 1fr)" }}
+        >
+          <div>
+            <ModalCheckbox
+              onClick={() => setCheck((v) => ({ ...v, chip: !v.chip }))}
+              show={check.chip}
+              label={
+                haveChip
+                  ? "Mi mascota a registrar cuenta con microchip o identificación interna"
+                  : "Mi mascota a registrar no cuenta con microchip o identificación interna"
+              }
+            />
+          </div>
+        </div>
+        <div
+          className={`${classes.modal__contentMainFormReveal}`}
+          style={{ gridTemplateColumns: "repeat(1, 1fr)" }}
+        >
+          <div>
+            <ModalCheckbox
+              onClick={() => setCheck((v) => ({ ...v, search: !v.search }))}
+              show={check.search}
+              label="Acepto compartir mi información en las búsquedas de la plataforma"
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
