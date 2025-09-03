@@ -4,17 +4,16 @@ import { imageURI } from "../../../config/constants/endpoints";
 import classes from "../../organisms/Consult/consult.module.scss";
 
 export const ContentMongoPet = ({ dataPet }) => {
-
-  const [loader, setLoader] = useState(true)
-  const [image, setImage] = useState(null)
+  const [loader, setLoader] = useState(true);
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     setTimeout(() => {
-      setLoader(false)
-    }, 2000)
-  }, [])
-  console.log("dataPet", dataPet)
-  console.log(isNaN(Number(dataPet.pet?.userName)))
+      setLoader(false);
+    }, 2000);
+  }, []);
+  console.log("dataPet", dataPet);
+  console.log(isNaN(Number(dataPet.pet?.userName)));
 
   return (
     <div className={classes.consult__content}>
@@ -26,29 +25,26 @@ export const ContentMongoPet = ({ dataPet }) => {
 
       <div>
         <div className={classes.consult__contentImg}>
-
           <div>
-            {
-              dataPet.pet?.chip != undefined ?
-                <Image
-                  src={`${ imageURI }${ dataPet?.pet.chip }.png`}
-                  layout="responsive"
-                  width={60}
-                  height={75}
-                  href="image-dog"
-                  alt="pet"
-                />
-                :
-                <Image
-                  src={"/img/img-nofound.png"}
-                  layout="responsive"
-                  width={60}
-                  height={75}
-                  href="image-dog"
-                  alt="not found"
-                />
-            }
-
+            {dataPet.pet?.chip != undefined ? (
+              <Image
+                src={`${imageURI}${dataPet?.pet.chip}.png?v=${Date.now()}`}
+                layout="responsive"
+                width={60}
+                height={75}
+                href="image-dog"
+                alt="pet"
+              />
+            ) : (
+              <Image
+                src={"/img/img-nofound.png"}
+                layout="responsive"
+                width={60}
+                height={75}
+                href="image-dog"
+                alt="not found"
+              />
+            )}
           </div>
 
           <div>
@@ -112,22 +108,18 @@ export const ContentMongoPet = ({ dataPet }) => {
 
               <div className={classes.consult__contentInfo__cardsText}>
                 <h4>Registrado por:</h4>
-                {dataPet.pet?.userAddress != undefined && (
+                {dataPet.pet?.userAddress != undefined &&
                   // si dataPet.pet?.userName es un number que no se muestra en la vista
-                  isNaN(Number(dataPet.pet?.userName)) ?
+                  (isNaN(Number(dataPet.pet?.userName)) ? (
                     <span></span>
-                    :
-                    <span>{
-                      dataPet.pet?.userAddress
-                    }</span>
-                )}
+                  ) : (
+                    <span>{dataPet.pet?.userAddress}</span>
+                  ))}
                 {!dataPet.pet?.userAddress && <span>No definido</span>}
                 <br />
-                {
-                  dataPet.pet?.userName && (
-                    <span>{`${ dataPet.pet?.userName.substring(0, 20) }...`}</span>
-                  )
-                }
+                {dataPet.pet?.userName && (
+                  <span>{`${dataPet.pet?.userName.substring(0, 20)}...`}</span>
+                )}
               </div>
             </div>
           </div>
@@ -249,7 +241,7 @@ export const ContentWeb3Pet = ({ pets }) => {
   useEffect(() => {
     resultData();
   }, [pets]);
-  console.log(dataPetWeb3)
+  console.log(dataPetWeb3);
   return (
     <div className={classes.consult__content}>
       <div className={classes.consult__contentBg}></div>
@@ -259,7 +251,7 @@ export const ContentWeb3Pet = ({ pets }) => {
           <div className="border border-red-600">
             <img
               //src={`https://res.cloudinary.img/worldanireg/image/upload/v1678899125/images/image/${ dataPetWeb3?.image }.png`}
-              src={`https://ipfs.io/ipfs/${ dataPetWeb3?.image }`}
+              src={`https://ipfs.io/ipfs/${dataPetWeb3?.image}`}
               layout="responsive"
               width={60}
               height={75}
@@ -314,15 +306,13 @@ export const ContentWeb3Pet = ({ pets }) => {
                 <span>{dataPetWeb3?.userAddress}</span>
               </div>
               <br />
-              {
-                dataPetWeb3?.userName && (
-                  // si dataPet.pet?.userName es un number que no se muestra en la vista
-                  isNaN(Number(dataPet.pet?.userName)) ?
-                    <span></span>
-                    :
-                    <span>{`${ dataPet.pet?.userName.substring(0, 20) }...`}</span>
-                )
-              }
+              {dataPetWeb3?.userName &&
+                // si dataPet.pet?.userName es un number que no se muestra en la vista
+                (isNaN(Number(dataPet.pet?.userName)) ? (
+                  <span></span>
+                ) : (
+                  <span>{`${dataPet.pet?.userName.substring(0, 20)}...`}</span>
+                ))}
             </div>
           </div>
 
