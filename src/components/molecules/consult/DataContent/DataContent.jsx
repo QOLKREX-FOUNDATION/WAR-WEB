@@ -87,6 +87,10 @@ export const ContentMongoPet = ({ dataPet }) => {
           // illness.push(marcas[vaccine.calicivirus]);
           illness.push("Calicivirus");
         }
+        if (vaccine.Kc > 0) {
+          // illness.push(marcas[vaccine.calicivirus]);
+          illness.push("Kc");
+        }
         temp.push({
           type: vaccine.tipo_visita === "vacuna" ? "VACCINES" : "DEWORMING",
           product: vaccine.clase_desp ? vaccine.clase_desp : marca,
@@ -435,9 +439,9 @@ export const ContentMongoPet = ({ dataPet }) => {
                       ) : (
                         <>
                           {races.map((race) => {
-                            console.log(race.value);
+                            //  console.log(race.value);
 
-                            console.log(dataPet.pet?.race);
+                            //    console.log(dataPet.pet?.race);
                             return (
                               race.value.toUpperCase().trim() ===
                                 dataPet.pet?.race.toUpperCase().trim() &&
