@@ -435,8 +435,9 @@ export const ContentMongoPet = ({ dataPet }) => {
                       ) : (
                         <>
                           {races.map((race) => {
-                            // console.log(race.value)
-                            // console.log(dataPet.pet?.race)
+                            console.log(race.value);
+
+                            console.log(dataPet.pet?.race);
                             return (
                               race.value.toUpperCase().trim() ===
                                 dataPet.pet?.race.toUpperCase().trim() &&
